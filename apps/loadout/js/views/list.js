@@ -1,6 +1,7 @@
 import { app } from '../app.js';
 import { parseItemText, splitLines, sortItems, stats, isHeader, headerText, between, endOrders, formatQty } from '../../../shared/items.js';
 import { renderInline } from '../../../shared/markdown.js';
+import { sortable } from '../../../shared/sortable.js';
 import { $, icon, toast, confirmDialog } from '../ui.js';
 import { h } from '../util.js';
 import { t, tErr } from '../../../shared/i18n.js';
@@ -11,7 +12,7 @@ export function mountList(body, board) {
   const canEdit = board.canEdit;
   const rows = new Map(); // id -> { el, sig }
   let editing = null;
-  let drag = null; // the row being dragged, see below
+  let sorter = null; // drag and keyboard reordering, set up below
 
   body.innerHTML = `
     <div class="list ${mode() === 'count' ? 'list-count' : 'list-check'}">
@@ -68,7 +69,7 @@ export function mountList(body, board) {
   }
 
   function sync() {
-    if (drag) return; // drop() redraws once the row is let go
+    if (sorter?.dragging()) return; // the drop redraws once the row is let go
     const items = [...board.items.values()];
     const m = mode();
     const { active, done } = m === 'check' ? sortItems(items) : { active: items.sort((a, b) => a.o - b.o || a.c - b.c), done: [] };
@@ -248,116 +249,28 @@ export function mountList(body, board) {
     });
   }
 
-  // ---- drag to reorder ----
-  // The list, which never moves, holds the pointer: rows are reordered under
-  // it, and a moved element would lose the capture (the drag then stopped
-  // following the finger). Distances are in page coordinates, so autoscroll
-  // near the screen edges keeps the row under the finger, and it keeps
-  // scrolling while the finger rests at the edge.
-  activeUl.addEventListener('pointerdown', (e) => {
-    const grip = e.target.closest('.grip');
-    if (!grip || e.button > 0 || drag) return;
-    e.preventDefault();
-    const li = grip.closest('li');
-    try {
-      activeUl.setPointerCapture(e.pointerId);
-    } catch {}
-    drag = { li, id: li.dataset.id, pointerId: e.pointerId, startPrev: li.previousElementSibling, startY: e.clientY + scrollY, clientY: e.clientY, fromY: e.clientY, gap: parseFloat(getComputedStyle(activeUl).rowGap) || 0, frame: 0 };
-    li.classList.add('dragging');
-    document.documentElement.classList.add('wjs-dragging');
-    drag.frame = requestAnimationFrame(tick);
-  });
-  activeUl.addEventListener('pointermove', (e) => {
-    if (!drag || e.pointerId !== drag.pointerId) return;
-    drag.clientY = e.clientY;
-    place();
-  });
-  for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) {
-    activeUl.addEventListener(type, (e) => {
-      if (drag && e.pointerId === drag.pointerId) drop();
-    });
-  }
-
-  /** Move the row to where the pointer is, swapping it past every neighbour it has crossed half of. */
-  function place() {
-    const { li, gap } = drag;
-    const y = drag.clientY + scrollY;
-    for (;;) {
-      const next = li.nextElementSibling;
-      const prev = li.previousElementSibling;
-      const dy = y - drag.startY;
-      if (next && dy > (next.offsetHeight + gap) / 2) {
-        activeUl.insertBefore(next, li);
-        drag.startY += next.offsetHeight + gap;
-      } else if (prev && dy < -(prev.offsetHeight + gap) / 2) {
-        activeUl.insertBefore(prev, li.nextElementSibling); // move the neighbour, not the dragged row
-        drag.startY -= prev.offsetHeight + gap;
-      } else break;
-    }
-    li.style.transform = `translateY(${y - drag.startY}px)`;
-  }
-
-  function tick() {
-    if (!drag) return;
-    // only towards the edge the finger is moving to: a press near an edge scrolls nothing by itself
-    const edge = 70;
-    const y = drag.clientY;
-    const up = y < edge && y < drag.fromY - 8;
-    const down = y > innerHeight - edge && y > drag.fromY + 8;
-    const speed = up ? -Math.ceil((edge - y) / 6) : down ? Math.ceil((y - (innerHeight - edge)) / 6) : 0;
-    if (speed) {
-      scrollBy(0, speed);
-      place();
-    }
-    drag.frame = requestAnimationFrame(tick);
-  }
-
-  async function drop() {
-    const d = drag;
-    drag = null;
-    cancelAnimationFrame(d.frame);
-    document.documentElement.classList.remove('wjs-dragging');
-    try {
-      activeUl.releasePointerCapture(d.pointerId);
-    } catch {}
-    d.li.style.transform = '';
-    d.li.classList.remove('dragging');
-    if (d.li.previousElementSibling !== d.startPrev) {
-      const before = board.items.get(d.li.previousElementSibling?.dataset.id);
-      const after = board.items.get(d.li.nextElementSibling?.dataset.id);
-      const o = between(before?.o ?? null, after?.o ?? null);
-      try {
-        if (o != null) await board.updateItem(d.id, { o });
-        else await renumber();
-      } catch (err) {
-        toast(tErr(err), 'error');
+  // ---- reordering: dragging by the grip, or Alt+↑ / Alt+↓ (shared/sortable.js) ----
+  sorter = sortable(activeUl, {
+    enabled: () => canEdit,
+    onDrop: async ({ id, before, after, moved }) => {
+      if (moved) {
+        const o = between(board.items.get(before)?.o ?? null, board.items.get(after)?.o ?? null);
+        try {
+          if (o != null) await board.updateItem(id, { o });
+          else await renumber();
+        } catch (err) {
+          toast(tErr(err), 'error');
+        }
       }
-    }
-    sync(); // the list as saved, including anything that arrived during the drag
-  }
+      sync(); // the list as saved, including anything that arrived during the drag
+    },
+  });
 
   /** Orders ran out of precision: write the current on-screen order as 0, 1, 2… */
   function renumber() {
     const ids = [...activeUl.children].map((el) => el.dataset.id);
     return Promise.all(ids.map((id, i) => board.updateItem(id, { o: i })));
   }
-
-  // Keyboard reordering for the focused row: Alt+↑ / Alt+↓.
-  activeUl.addEventListener('keydown', async (e) => {
-    if (!canEdit || !e.altKey || !['ArrowUp', 'ArrowDown'].includes(e.key)) return;
-    const li = e.target.closest('li.item');
-    const up = e.key === 'ArrowUp';
-    const sib = up ? li?.previousElementSibling : li?.nextElementSibling;
-    if (!sib) return;
-    e.preventDefault();
-    const [a, b] = up ? [sib.previousElementSibling, sib] : [sib, sib.nextElementSibling];
-    const o = between(board.items.get(a?.dataset.id)?.o ?? null, board.items.get(b?.dataset.id)?.o ?? null);
-    try {
-      if (o != null) await board.updateItem(li.dataset.id, { o });
-    } catch (err) {
-      toast(tErr(err), 'error');
-    }
-  });
 
   const off = board.on((what) => {
     if (what === 'items' || what === 'all') sync();
@@ -366,9 +279,7 @@ export function mountList(body, board) {
 
   return () => {
     off();
-    if (drag) cancelAnimationFrame(drag.frame);
-    drag = null;
-    document.documentElement.classList.remove('wjs-dragging');
+    sorter.destroy();
     body.removeEventListener('click', onClick);
     body.removeEventListener('change', onChange);
   };

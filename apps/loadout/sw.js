@@ -1,7 +1,7 @@
 // Offline support: the app shell is cached on install. Requests go to the
 // network first so updates show up right away, and fall back to the cache
 // when offline (e.g. in a supermarket basement). Bump VERSION on release.
-const VERSION = 'loadout-v13';
+const VERSION = 'loadout-v14';
 const SHELL = [
   './',
   'index.html',
@@ -57,6 +57,7 @@ const SHELL = [
   '../shared/purify.es.mjs',
   '../shared/qrcode.mjs',
   '../shared/how.js',
+  '../shared/sortable.js',
   '../shared/locales/en.json',
 ];
 

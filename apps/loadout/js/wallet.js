@@ -2,14 +2,19 @@
 // key, so any device signed in as you sees the same boards. Each board sits
 // in a slot named by a hash of its address, so relays can't tell which boards
 // you have. Per-device extras (last opened, counts) stay in localStorage.
+// The order on the start page is the person's: pinned boards first, then
+// boards not sorted yet (newest first), then the sorted ones by `o`, which
+// syncs with each board's entry like a list item's order.
 
 import { KINDS, makeAddressable, seal, open, dTag, hex } from '../../shared/events.js';
 import { sha256 } from '../../shared/nostr.mjs';
 import { selfKey } from '../../shared/account.js';
 import { store } from '../../shared/util.js';
+import { between } from '../../shared/items.js';
 import { pool, db, sync } from './net.js';
 
-const SYNCED = ['pub', 'w', 'k', 'type', 'title', 'mode', 'pinned', 'added', 'u'];
+const SYNCED = ['pub', 'w', 'k', 'type', 'title', 'mode', 'pinned', 'added', 'o', 'u'];
+const sorted = (e) => typeof e.o === 'number';
 const te = new TextEncoder();
 const FILTER = (pk) => ({ kinds: [KINDS.LOADOUT_WALLET], authors: [pk] });
 
@@ -74,9 +79,25 @@ export class Wallet {
   }
 
   list() {
+    const recent = (e) => this.localOf(e.pub).opened || e.added || 0;
     return [...this.entries.values()].sort(
-      (a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0) || (this.localOf(b.pub).opened || b.added || 0) - (this.localOf(a.pub).opened || a.added || 0),
+      (a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0) || sorted(a) - sorted(b) || (sorted(a) ? a.o - b.o : recent(b) - recent(a)),
     );
+  }
+
+  /**
+   * `pub` was moved; `pubs` are its group (pinned or not) top to bottom as
+   * shown now. One board gets a new order between its neighbours; the first
+   * time, or when the gap runs out, the whole group is numbered as shown.
+   */
+  async reorder(pubs, pub) {
+    const o = (p) => this.entries.get(p)?.o;
+    const i = pubs.indexOf(pub);
+    if (i < 0) return;
+    const all = pubs.every((p) => typeof o(p) === 'number');
+    const next = all ? between(o(pubs[i - 1]) ?? null, o(pubs[i + 1]) ?? null) : null;
+    if (next != null) return void (await this.upsert({ pub, o: next }));
+    await Promise.all(pubs.map((p, k) => (o(p) === k ? null : this.upsert({ pub: p, o: k }))));
   }
 
   get(pub) {

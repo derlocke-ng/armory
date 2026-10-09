@@ -2,6 +2,7 @@ import { app } from '../app.js';
 import { Board, createBoard } from '../boards.js';
 import { parseBoardInput, boardHash } from '../links.js';
 import { parseItemText, splitLines, endOrders } from '../../../shared/items.js';
+import { sortable } from '../../../shared/sortable.js';
 import { icon, modal, toast } from '../ui.js';
 import { h, store } from '../util.js';
 import { LIMITS } from '../config.js';
@@ -44,7 +45,11 @@ export async function fillBoard(entry, kind, text) {
 }
 
 export function renderHome(view) {
+  let sorter = null; // dragging cards into the person's order (shared/sortable.js)
   const draw = () => {
+    if (sorter?.dragging()) return; // the drop redraws
+    sorter?.destroy();
+    const focused = view.querySelector('.boards li:focus-within')?.dataset.id; // a redraw keeps the focus on its card
     const boards = app.wallet.list();
     view.innerHTML = `
       <section class="home">
@@ -60,7 +65,24 @@ export function renderHome(view) {
         ${boards.length ? startersRow() : ''}
         ${boards.length ? `<ul class="boards">${boards.map(card).join('')}</ul>` : empty()}
       </section>`;
+    const ul = view.querySelector('.boards');
+    sorter = ul && sortable(ul, { onDrop: (move) => reorder(ul, move) });
+    if (focused) view.querySelector(`.boards li[data-id="${focused}"] .board-card`)?.focus();
   };
+
+  /** Save the order as shown; pinned boards stay above the others, so a card is ordered within its group. */
+  async function reorder(ul, { id, el, moved }) {
+    if (moved) {
+      const pinned = el.classList.contains('pinned');
+      const group = [...ul.children].filter((li) => li.classList.contains('pinned') === pinned).map((li) => li.dataset.id);
+      try {
+        await app.wallet.reorder(group, id);
+      } catch (err) {
+        toast(tErr(err), 'error');
+      }
+    }
+    draw();
+  }
   draw();
   const off = app.wallet.onChange(draw);
   const offSettings = app.settings?.onChange(draw);
@@ -80,6 +102,7 @@ export function renderHome(view) {
   return () => {
     off();
     offSettings?.();
+    sorter?.destroy();
     view.removeEventListener('click', onClick);
   };
 }
@@ -121,7 +144,8 @@ function card(b) {
   const progress = kind === 'check' && local.total ? t('home.progress', { done: local.done || 0, total: local.total }) : kind === 'count' && local.total ? t('home.items', { n: local.total }) : '';
   const when = local.opened ? t('home.opened', { when: relTime(local.opened) }) : t('home.added', { when: relTime(b.added) });
   return `
-    <li>
+    <li class="board-row${b.pinned ? ' pinned' : ''}" data-id="${h(b.pub)}">
+      <button type="button" class="grip" aria-label="${h(t('list.drag'))}" title="${h(t('list.drag'))}" tabindex="-1">${icon('grip-vertical')}</button>
       <a class="board-card" href="${h(boardHash({ pub: b.pub }))}">
         <span class="board-icon kind-${kind}">${icon(TYPES[kind].icon)}</span>
         <span class="board-main">

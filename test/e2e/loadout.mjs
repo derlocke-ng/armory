@@ -498,6 +498,49 @@ await run('loadout', async (env) => {
   await sleep(1000);
   assert.equal((await texts(slow, '#active .text')).slice(0, 2).join('|'), 'row 20|row 3', 'kept after a reload, although its clock is a minute behind');
 
+  step('the start page: boards and notes in your own order, by dragging or Alt+arrow; it follows your key to other devices');
+  await open(R);
+  await newBoard(R, 'note', 'Ideas');
+  await open(R);
+  await newBoard(R, 'check', 'Errands');
+  await open(R);
+  const cards = (page = R) => texts(page, '.boards .board-title');
+  await until(async () => (await cards()).join('|') === 'Errands|Ideas|Order', 'newest first until sorted');
+  await R.$eval('.boards', (el) => window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - 150));
+  const firstCard = await center('.boards li:nth-child(1)');
+  await dragTo('.boards li:nth-child(3)', firstCard.y - 12);
+  await until(async () => (await cards()).join('|') === 'Order|Errands|Ideas', 'the note list dragged to the top');
+  assert.equal(await R.evaluate(() => document.documentElement.classList.contains('wjs-dragging')), false);
+  await R.focus('.boards li:nth-child(1) .board-card');
+  await R.keyboard.press('Alt+ArrowDown');
+  await until(async () => (await cards()).join('|') === 'Errands|Order|Ideas', 'Alt+ArrowDown moves the focused card');
+  assert.equal(await R.evaluate(() => document.activeElement?.closest('li')?.querySelector('.board-title')?.textContent), 'Order', 'and it keeps the focus');
+  await R.click('.boards li:nth-child(3) .board-card');
+  await R.waitForSelector('#boardName');
+  await open(R);
+  await until(async () => (await cards()).join('|') === 'Errands|Order|Ideas', 'opening a board does not reshuffle a sorted start page');
+  await sleep(1000);
+  await R.reload();
+  await R.waitForSelector('.boards li');
+  assert.equal((await cards()).join('|'), 'Errands|Order|Ideas', 'kept after a reload');
+  const key = await R.evaluate(() => localStorage.getItem('wjs.identity'));
+  const R2 = await device(
+    env,
+    'R2',
+    ({ relay, key }) => {
+      localStorage.setItem('wjs.relays', JSON.stringify([relay]));
+      localStorage.setItem('wjs.identity', key);
+    },
+    { relay: env.nostrUrl, key },
+    { viewport: { width: 400, height: 600 } },
+  );
+  await open(R2);
+  await until(async () => (await cards(R2)).join('|') === 'Errands|Order|Ideas', 'the same order on another device with the same key', 20000);
+  await newBoard(R, 'check', 'Fresh');
+  await open(R);
+  await until(async () => (await cards()).join('|') === 'Fresh|Errands|Order|Ideas', 'a new board starts on top; the sorted ones keep their order');
+  await R2.ctx.close();
+
   step('a German browser is asked in German and gets a German app; English stays English');
   const DE = await dev('DE', { locale: 'de-DE' });
   await open(DE);

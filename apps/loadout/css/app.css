@@ -149,6 +149,33 @@ body[data-route='board'] .view {
   gap: 0.6rem;
 }
 
+/* a card with its grip: drag (or Alt+arrow) to put boards in your order */
+.board-row {
+  position: relative;
+}
+
+.board-row .grip {
+  position: absolute;
+  left: 0.1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.board-row .board-card {
+  padding-left: 1.75rem;
+}
+
+.board-row.dragging {
+  position: relative;
+  z-index: 10;
+}
+
+.board-row.dragging .board-card {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-pop);
+}
+
 .board-card {
   display: flex;
   align-items: center;
