@@ -8,7 +8,7 @@ Armory is a **distribution** of [kiwi-framework](https://github.com/derlocke-ng/
 
 | Tool | What it does | Built with |
 |---|---|---|
-| [**Loadout**](apps/loadout) · [open](https://derlocke-ng.github.io/armory/loadout/) | Shared grocery/to-do lists, household inventory and markdown notes across devices; end-to-end encrypted, rentry-style links, survives relays forgetting | nostr, AES-GCM |
+| [**Loadout**](apps/loadout) · [open](https://derlocke-ng.github.io/armory/loadout/) | Shared grocery/to-do lists, household inventory and markdown notes across devices; end-to-end encrypted, rentry-style links, survives relays forgetting. The framework's boards app, mounted under Armory's name | nostr, AES-GCM, React |
 | [**Payload**](apps/payload) · [open](https://derlocke-ng.github.io/armory/payload/) | Send files straight to another online browser; every 64 KB piece checked with SHA-256 | gun signaling, WebRTC (moving to nostr) |
 | [**pongjs**](apps/pongjs) · [open](https://derlocke-ng.github.io/armory/pongjs/) | Two-player Pong between browsers: link, QR or open-games lobby | gun signaling, WebRTC (moving to nostr) |
 | [EnigmaJS](apps/enigmajs) · [open](https://derlocke-ng.github.io/armory/enigmajs/) | Encrypted, ephemeral group chat rooms | gun, SEA, Vue + Vite |
@@ -27,15 +27,15 @@ distribution.js      what this hub is: name and mark, default relays and media s
                      it ships and the mounts it shows (the one file a fork changes)
 kiwi.manifest        this hub's entry for kiwi-web-catalog; every app has one too
 locales/<lang>.json  this hub's own strings: title, lead, footer, one card text per mount
-apps/<id>/           one folder per tool (served at /<id>/)
+apps/<id>/           one folder per tool (served at /<id>/); for a framework app (Loadout)
+                     only what is laid over it: icons, manifest, catalog entry
 public/              optional: files copied over the site root (favicon, CNAME)
 icons.svg            optional: lucide symbols added to the framework's sprite
-scripts/vendor.mjs   Loadout's own icon sprite
 test/                unit tests (node --test) and end-to-end tests per app
 .github/workflows/   test, build and deploy to GitHub Pages
 ```
 
-Everything else comes from the framework in `node_modules/kiwi-framework`: the start page, the settings and account pages (React and TypeScript, built with Vite), the React layer apps use (`ui/`), the library underneath (`shared/`, also served at `/shared/` for the apps not yet ported), the service worker, the icon sprite, the dev server, the build and the scaffolder. `npm run build` assembles `_site/`: the hub at the root, the library in `shared/`, this file's config in place of the framework's, the strings merged, every app copied (or built, for Vite apps such as EnigmaJS), and a service worker whose version is a hash of what it precaches.
+Everything else comes from the framework in `node_modules/kiwi-framework`: the start page, the settings and account pages (React and TypeScript, built with Vite), the React layer apps use (`ui/`), the library underneath (`shared/`, also served at `/shared/` for the apps not yet ported), the service worker, the icon sprite, the dev server, the build and the scaffolder. `npm run build` assembles `_site/`: the hub at the root, the library in `shared/`, this file's config in place of the framework's, the strings merged, every app copied (or built: the framework's apps such as Loadout, and Vite apps such as EnigmaJS), and a service worker whose version is a hash of what it precaches.
 
 ## Adding an app
 
@@ -64,10 +64,9 @@ npm run build && npm run serve # the full site, as deployed
 npm run relay:nostr            # local nostr relay on ws://localhost:7777 (data in .nostr/)
 npm run relay                  # local gun relay on http://localhost:8765/gun (Payload, pongjs)
 npm run test:e2e               # Loadout, the hub, DevBoard, Payload and pongjs in real browsers (needs Chromium)
-npm run vendor                 # rebuild Loadout's icon sprite after bumping lucide-static
 ```
 
-In Loadout, add `ws://localhost:7777` under *Account → Relays* to work against the local relay.
+In the hub's settings (*Network*), add `ws://localhost:7777` to work against the local relay.
 
 The framework is pinned in `package.json` to one commit or release tag of kiwi-framework (`github:derlocke-ng/kiwi-framework#<tag or sha>`); bump it deliberately and run the tests. To work on both at once, point it at a checkout: `npm install ../kiwi-framework`.
 
@@ -77,4 +76,4 @@ GitHub Pages, built by `.github/workflows/deploy.yml` on every push to `main` (p
 
 ## License
 
-[GPL-3.0-or-later](LICENSE). EnigmaJS, the one legacy app, keeps its own license: PolyForm Noncommercial 1.0.0 (see its folder). Third-party code is listed in the framework's `shared/LICENSES.md`; Loadout's icon sprite is Lucide (ISC).
+[GPL-3.0-or-later](LICENSE). EnigmaJS, the one legacy app, keeps its own license: PolyForm Noncommercial 1.0.0 (see its folder). Third-party code is listed in the framework's `shared/LICENSES.md`.

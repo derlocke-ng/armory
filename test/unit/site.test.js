@@ -61,6 +61,9 @@ test('the site service worker precaches the hub, shared/ and every app without a
   assert.deepEqual(listed, shell);
   assert.deepEqual(shell.filter((f) => !f.endsWith('/') && !fs.existsSync(path.join(out, f))), [], 'SHELL lists files that do not exist');
   for (const f of ['./', 'index.html', 'settings.html', 'shared/appshell.js', 'shared/ui.css', 'locales/en.json', 'devboard/', 'devboard/devboard.js', 'payload/', 'pongjs/']) assert.ok(shell.includes(f), `${f} is precached`);
-  assert.ok(!shell.some((f) => f.startsWith('loadout/')), 'Loadout has its own worker and is not precached by the site');
+  // Loadout is the framework's boards app, built for loadout/: the site's worker caches it like the hub
+  assert.ok(shell.includes('loadout/') && shell.includes('loadout/index.html') && shell.includes('loadout/locales/en.json'), 'Loadout is precached by the site');
+  assert.ok(shell.some((f) => /^loadout\/assets\/.+\.js$/.test(f)), 'with its built script');
+  assert.ok(!fs.existsSync(path.join(out, 'loadout', 'sw.js')), 'and no worker of its own');
   assert.ok(!shell.some((f) => f.startsWith('enigmajs/')), 'legacy apps are not precached');
 });

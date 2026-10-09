@@ -8,7 +8,9 @@
 //   apps     the code this distribution ships, once each: id is the folder
 //            under apps/ and the URL path, icon a symbol in the framework's
 //            sprite (or this repository's icons.svg), tags what it runs on,
-//            legacy marks an app built elsewhere (Vite) that is not precached
+//            legacy marks an app built elsewhere (Vite) that is not precached,
+//            framework names one of the framework's own apps (Loadout is its
+//            boards app); files in apps/<id>/ are laid over it (icons, manifest)
 //   mounts   what the start page and the switcher show: an app mounted on a
 //            space. A mount may rename the app and change its icon; the id
 //            is this hub's route (<id>/) and the i18n key of its card text
@@ -32,7 +34,7 @@ export const DISTRIBUTION = {
   media: ['https://nostr.download', 'https://blossom.yakihonne.com', 'https://blossom.band', 'https://blossom.primal.net'],
   policy: { userMounts: false },
   apps: [
-    { id: 'loadout', name: 'Loadout', icon: 'list-checks', tags: ['nostr', 'E2EE', 'offline-first', 'markdown'] },
+    { id: 'loadout', name: 'Loadout', icon: 'list-checks', tags: ['nostr', 'E2EE', 'offline-first', 'markdown'], framework: 'boards' },
     { id: 'payload', name: 'Payload', icon: 'send', tags: ['gun', 'WebRTC', 'SHA-256'] },
     { id: 'pongjs', name: 'pongjs', icon: 'gamepad-2', tags: ['gun', 'WebRTC', 'canvas'] },
     { id: 'devboard', name: 'DevBoard', icon: 'sticky-note', tags: ['nostr', 'proof of work', 'signed notes'] },

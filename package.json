@@ -14,17 +14,15 @@
     "relay": "node node_modules/kiwi-framework/scripts/relay.cjs",
     "icons": "node node_modules/kiwi-framework/scripts/app-icons.mjs",
     "new-app": "node node_modules/kiwi-framework/scripts/new-app.mjs",
-    "vendor": "node scripts/vendor.mjs",
     "test": "node --test \"test/unit/*.test.js\"",
     "test:e2e": "node test/e2e/loadout.mjs && node test/e2e/hub.mjs && node test/e2e/devboard.mjs && node test/e2e/payload.mjs && node test/e2e/pong.mjs",
     "probe": "node node_modules/kiwi-framework/scripts/blossom-probe.mjs"
   },
   "dependencies": {
-    "kiwi-framework": "git+https://github.com/derlocke-ng/kiwi-framework.git#44fb9c7320b745aebeac123232e3e9cec366d754"
+    "kiwi-framework": "git+https://github.com/derlocke-ng/kiwi-framework.git#3118c5ae6a5b82376844a53c621af7dcb03973b2"
   },
   "devDependencies": {
     "gun": "0.2020.1241",
-    "lucide-static": "1.52.0",
     "nostr-tools": "^2.25.2",
     "playwright-core": "1.63.0"
   }
