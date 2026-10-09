@@ -1,0 +1,13 @@
+# kiwi.manifest: this app's entry for the Kiwi Network web catalog
+NAME=enigmajs
+DESCRIPTION=Encrypted, ephemeral group chat rooms (legacy; goes once the chat app exists)
+VERSION=0.0.0
+CATEGORY=App
+COMPONENTS=web
+FRAMEWORK=kiwi-framework
+ICON=public/favicon.svg
+# the nostr event kinds it reads and writes
+KINDS=
+TAGS=gun sea vue legacy
+HOMEPAGE=https://derlocke-ng.github.io/armory/enigmajs/
+LICENSE=PolyForm-Noncommercial-1.0.0

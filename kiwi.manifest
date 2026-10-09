@@ -1,0 +1,13 @@
+# kiwi.manifest: what this repository is, for the Kiwi Network web catalog
+# (https://github.com/derlocke-ng/kiwi-web-catalog). Each app under apps/
+# carries its own.
+NAME=armory
+DESCRIPTION=derlocke-ng's hub of peer-to-peer webtools on nostr, built on kiwi-framework; the template to fork
+VERSION=0.1.0
+CATEGORY=Hub
+COMPONENTS=web
+FRAMEWORK=kiwi-framework
+TAGS=nostr hub pwa
+HOMEPAGE=https://derlocke-ng.github.io/armory/
+REPO=https://github.com/derlocke-ng/armory
+LICENSE=GPL-3.0-or-later

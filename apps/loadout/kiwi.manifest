@@ -1,0 +1,13 @@
+# kiwi.manifest: this app's entry for the Kiwi Network web catalog
+NAME=loadout
+DESCRIPTION=Shared lists, household inventory and markdown notes across devices and friends, end-to-end encrypted
+VERSION=0.1.0
+CATEGORY=App
+COMPONENTS=web
+FRAMEWORK=kiwi-framework
+ICON=icon.svg
+# the nostr event kinds it reads and writes
+KINDS=30700 30701 30702 30703
+TAGS=nostr e2ee offline-first markdown
+HOMEPAGE=https://derlocke-ng.github.io/armory/loadout/
+LICENSE=GPL-3.0-or-later

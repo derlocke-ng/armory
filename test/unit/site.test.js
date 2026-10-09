@@ -29,6 +29,9 @@ test('the registry is consistent: unique ids, folders, icons in the sprite, hub 
   for (const app of APPS) {
     assert.match(app.id, /^[a-z][a-z0-9-]*$/);
     assert.ok(fs.existsSync(path.join(root, 'apps', app.id)), `apps/${app.id} exists`);
+    const manifest = fs.readFileSync(path.join(root, 'apps', app.id, 'kiwi.manifest'), 'utf8');
+    assert.match(manifest, new RegExp(`^NAME=${app.id}$`, 'm'), `apps/${app.id}/kiwi.manifest names the app`);
+    assert.match(manifest, /^CATEGORY=App$/m, `apps/${app.id}/kiwi.manifest is an App entry`);
     assert.ok(sprite.includes(`<symbol id="${app.icon}"`), `${app.id}: icon "${app.icon}" is in the sprite`);
   }
   for (const m of MOUNTS) {

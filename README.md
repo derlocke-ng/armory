@@ -14,7 +14,7 @@ Armory is a **distribution** of [kiwi-framework](https://github.com/derlocke-ng/
 | [EnigmaJS](apps/enigmajs) · [open](https://derlocke-ng.github.io/armory/enigmajs/) | Encrypted, ephemeral group chat rooms | gun, SEA, Vue + Vite |
 | [DevBoard](apps/devboard) · [open](https://derlocke-ng.github.io/armory/devboard/) | Freelancer noticeboard: signed notes with proof of work, votes, reports, expiry; the hub's account and block list | nostr, NIP-13, NIP-25, NIP-56 |
 
-Coming: **Uplink** (chat between accounts and ephemeral rooms) and **Outpost** (grow reports with an Instagram-style feed, and a marketplace for seeds). EnigmaJS is legacy and goes once Uplink exists.
+Coming, as framework apps under Armory's own names: **Uplink** (the framework's `chat`: messages between accounts and ephemeral rooms), **Outpost** (`feed`: grow reports with an Instagram-style feed) and **Trading Post** (`market`: seeds, cuttings and gear), later a blog. The framework names its apps plainly; a distribution shows them under its names through its mounts. EnigmaJS is legacy and goes once Uplink exists.
 
 **One account, one settings page.** Sign in or create an account on the landing page (username + password, or a nostr key) and every tool uses it; boards made on a device before signing in are carried over. Without an account each device simply uses its own key. The hub's settings page holds everything that is not specific to one tool: account and key export, relays with live status, proof of work, backup and restore of everything your devices know, language and appearance (which follow your account), hidden apps, people (friends and circles), and wiping the device. Each tool keeps only its own settings.
 
@@ -25,6 +25,7 @@ Every page is translated: English, German, French, Spanish, Italian, Dutch, Poli
 ```
 distribution.js      what this hub is: name and mark, default relays, policy, the apps
                      it ships and the mounts it shows (the one file a fork changes)
+kiwi.manifest        this hub's entry for kiwi-web-catalog; every app has one too
 locales/<lang>.json  this hub's own strings: title, lead, footer, one card text per mount
 apps/<id>/           one folder per tool (served at /<id>/)
 public/              optional: files copied over the site root (favicon, CNAME)
@@ -46,7 +47,12 @@ That scaffolds `apps/outpost/` (page, script on the shared core and app shell, s
 
 ## Forking
 
-Fork the repository, change `distribution.js` (id, name, mark, relays, apps, mounts) and `locales/`, drop or add apps, and push: the workflow builds and deploys your hub. Users of your hub and of this one share nothing by default but the protocol; they meet on the relays they both use. The model (framework, distributions, apps; spaces and mounts; federation) is in the framework's [`docs/architecture.md`](https://github.com/derlocke-ng/kiwi-framework/blob/main/docs/architecture.md).
+Armory is a GitHub template repository: **Use this template** gives you a copy without Armory's history, a fork keeps it; both work. Then:
+
+1. `distribution.js`: id, name, mark, description, homepage and repository, relays, the apps you keep and the mounts you show.
+2. `locales/*.json`: title, lead, footer and one card text per mount, in the languages you care about (English is the fallback).
+3. `kiwi.manifest`: your hub's name and description. Add a line for it to [kiwi-web-catalog](https://github.com/derlocke-ng/kiwi-web-catalog) if you want other hubs to find your apps.
+4. In the repository settings set **Pages → Source** to **GitHub Actions**, then push: the workflow builds and deploys your hub. Users of your hub and of this one share nothing by default but the protocol; they meet on the relays they both use. The model (framework, distributions, apps; spaces and mounts; federation) is in the framework's [`docs/architecture.md`](https://github.com/derlocke-ng/kiwi-framework/blob/main/docs/architecture.md).
 
 ## Development
 
