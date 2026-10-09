@@ -9,10 +9,10 @@ Armory is a **distribution** of [kiwi-framework](https://github.com/derlocke-ng/
 | Tool | What it does | Built with |
 |---|---|---|
 | [**Loadout**](apps/loadout) · [open](https://derlocke-ng.github.io/armory/loadout/) | Shared grocery/to-do lists, household inventory and markdown notes across devices; end-to-end encrypted, rentry-style links, survives relays forgetting. The framework's boards app, mounted under Armory's name | nostr, AES-GCM, React |
-| [**Payload**](apps/payload) · [open](https://derlocke-ng.github.io/armory/payload/) | Send files straight to another online browser; every 64 KB piece checked with SHA-256 | gun signaling, WebRTC (moving to nostr) |
-| [**pongjs**](apps/pongjs) · [open](https://derlocke-ng.github.io/armory/pongjs/) | Two-player Pong between browsers: link, QR or open-games lobby | gun signaling, WebRTC (moving to nostr) |
+| [**Payload**](apps/payload) · [open](https://derlocke-ng.github.io/armory/payload/) | Send files straight to another online browser; every 64 KB piece checked with SHA-256. The framework's payload app | gun signaling, WebRTC (moving to nostr), React |
+| [**pongjs**](apps/pongjs) · [open](https://derlocke-ng.github.io/armory/pongjs/) | Two-player Pong between browsers: link, QR or open-games lobby. The framework's pong app | gun signaling, WebRTC (moving to nostr), React, canvas |
 | [EnigmaJS](apps/enigmajs) · [open](https://derlocke-ng.github.io/armory/enigmajs/) | Encrypted, ephemeral group chat rooms | gun, SEA, Vue + Vite |
-| [DevBoard](apps/devboard) · [open](https://derlocke-ng.github.io/armory/devboard/) | Freelancer noticeboard: signed notes with proof of work, votes, reports, expiry; the hub's account and block list | nostr, NIP-13, NIP-25, NIP-56 |
+| [DevBoard](apps/devboard) · [open](https://derlocke-ng.github.io/armory/devboard/) | Freelancer noticeboard: signed notes with proof of work, votes, reports, expiry; the hub's account and block list. The framework's notices app | nostr, NIP-13, NIP-25, NIP-56, React |
 
 Coming, as framework apps under Armory's own names: **Uplink** (the framework's `chat`: messages between accounts and ephemeral rooms), **Outpost** (`feed`: grow reports with an Instagram-style feed) and **Trading Post** (`market`: seeds, cuttings and gear), later a blog. The framework names its apps plainly; a distribution shows them under its names through its mounts. EnigmaJS is legacy and goes once Uplink exists.
 
@@ -27,15 +27,15 @@ distribution.js      what this hub is: name and mark, default relays and media s
                      it ships and the mounts it shows (the one file a fork changes)
 kiwi.manifest        this hub's entry for kiwi-web-catalog; every app has one too
 locales/<lang>.json  this hub's own strings: title, lead, footer, one card text per mount
-apps/<id>/           one folder per tool (served at /<id>/); for a framework app (Loadout)
-                     only what is laid over it: icons, manifest, catalog entry
+apps/<id>/           one folder per tool (served at /<id>/): an app of our own (React on kiwi-framework/ui,
+                     built by Vite), or for a framework app only what is laid over it: icons, catalog entry
 public/              optional: files copied over the site root (favicon, CNAME)
 icons.svg            optional: lucide symbols added to the framework's sprite
 test/                unit tests (node --test) and end-to-end tests per app
 .github/workflows/   test, build and deploy to GitHub Pages
 ```
 
-Everything else comes from the framework in `node_modules/kiwi-framework`: the start page, the settings and account pages (React and TypeScript, built with Vite), the React layer apps use (`ui/`), the library underneath (`shared/`, also served at `/shared/` for the apps not yet ported), the service worker, the icon sprite, the dev server, the build and the scaffolder. `npm run build` assembles `_site/`: the hub at the root, the library in `shared/`, this file's config in place of the framework's, the strings merged, every app copied (or built: the framework's apps such as Loadout, and Vite apps such as EnigmaJS), and a service worker whose version is a hash of what it precaches.
+Everything else comes from the framework in `node_modules/kiwi-framework`: the start page, the settings and account pages, Loadout, DevBoard, Payload and pongjs (all React and TypeScript, built with Vite), the React layer apps use (`ui/`), the library underneath (`shared/`), the service worker, the icon sprite, the dev server, the build and the scaffolder. `npm run build` assembles `_site/`: the hub at the root, the library in `shared/`, this file's config in place of the framework's, the strings merged, every app built for its route (the framework's apps under Armory's names, our own React apps the same way, EnigmaJS with its own Vite and Vue), and a service worker whose version is a hash of what it precaches.
 
 ## Adding an app
 
@@ -43,7 +43,7 @@ Everything else comes from the framework in `node_modules/kiwi-framework`: the s
 npm run new-app -- outpost "Outpost" sprout     # id, name, a lucide symbol id from the sprite
 ```
 
-That scaffolds `apps/outpost/` (page, script on the shared core and app shell, settings view, strings in every language), registers and mounts the app in `distribution.js`, adds its card text to `locales/` and draws its favicon. The start page, the switcher, the Apps toggles, the top bar and the service worker then know it, and the app gets the account's friends, circles and sharing (`shell.people`) and block list (`shell.blocks`) from the shell. What remains is the app itself, its translations and a browser test; `npm run icons` redraws favicons after an icon change, and `npm test` tells you when something is stale.
+That scaffolds `apps/outpost/` as a React app on the framework's React layer (`kiwi-framework/ui`): page, `App.tsx` with the app shell, a home and a settings page, its stylesheet and strings in every language. It registers and mounts the app in `distribution.js`, adds its card text to `locales/` and draws its favicon. The build compiles it with Vite for every route it is mounted at, like the framework's own apps, and `npm run dev` rebuilds it on save. The start page, the switcher, the Apps toggles, the top bar and the service worker then know it, and the app gets the account (`useIdentity`), its own settings in the account (`useAppSettings`), friends, circles and sharing (`usePeople`, `pickPeople`), the block list (`useBlocks`), nostr events (`useEvents`) and the widgets. What remains is the app itself, its translations and a browser test; `npm run icons` redraws favicons after an icon change, and `npm test` tells you when something is stale.
 
 ## Forking
 

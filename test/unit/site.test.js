@@ -9,7 +9,7 @@ const { out, config, shell } = await site();
 const { APPS, MOUNTS, appById, mountById, mountsOf, appMark } = await import(pathToFileURL(path.join(out, 'shared/apps.js')).href);
 
 test('the site assembles: hub, library, this distribution’s config, every app', () => {
-  for (const f of ['index.html', 'settings.html', 'manifest.webmanifest', 'sw.js', 'icons.svg', 'shared/appshell.js', 'shared/distribution.js', 'locales/en.json', '.nojekyll']) {
+  for (const f of ['index.html', 'settings.html', 'manifest.webmanifest', 'sw.js', 'icons.svg', 'shared/distribution.js', 'locales/en.json', '.nojekyll']) {
     assert.ok(fs.existsSync(path.join(out, f)), `${f} is in the site`);
   }
   assert.equal(config.id, 'armory');
@@ -60,7 +60,7 @@ test('the site service worker precaches the hub, shared/ and every app without a
   const listed = JSON.parse(sw.match(/const SHELL = (\[[\s\S]*?\]);/)[1].replace(/'/g, '"'));
   assert.deepEqual(listed, shell);
   assert.deepEqual(shell.filter((f) => !f.endsWith('/') && !fs.existsSync(path.join(out, f))), [], 'SHELL lists files that do not exist');
-  for (const f of ['./', 'index.html', 'settings.html', 'shared/appshell.js', 'shared/ui.css', 'locales/en.json', 'devboard/', 'devboard/devboard.js', 'payload/', 'pongjs/']) assert.ok(shell.includes(f), `${f} is precached`);
+  for (const f of ['./', 'index.html', 'settings.html', 'shared/ui.css', 'locales/en.json', 'devboard/', 'devboard/index.html', 'payload/', 'payload/index.html', 'pongjs/', 'pongjs/index.html']) assert.ok(shell.includes(f), `${f} is precached`);
   // Loadout is the framework's boards app, built for loadout/: the site's worker caches it like the hub
   assert.ok(shell.includes('loadout/') && shell.includes('loadout/index.html') && shell.includes('loadout/locales/en.json'), 'Loadout is precached by the site');
   assert.ok(shell.some((f) => /^loadout\/assets\/.+\.js$/.test(f)), 'with its built script');
