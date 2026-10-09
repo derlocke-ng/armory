@@ -247,7 +247,7 @@ await run('loadout', async (env) => {
   await until(async () => (await texts(A, '#done .text')).includes('milk'), 'offline check reached A', 10000);
 
   step('backup → restore on a fresh device');
-  await E.goto(SETTINGS);
+  await E.goto(`${SETTINGS}#backup`);
   await E.waitForSelector('[data-act=backup]');
   await E.click('[data-act=backup]');
   await E.fill('#backupForm [name=pass]', 'backup passphrase 1');
@@ -259,7 +259,7 @@ await run('loadout', async (env) => {
   assert.equal(backup.kind, 'wjs-backup');
   assert.ok(!fs.readFileSync(file, 'utf8').includes('coffee'), 'backup is encrypted');
   const restore = async (page, passphrase) => {
-    await page.goto(SETTINGS);
+    await page.goto(`${SETTINGS}#backup`);
     await page.waitForSelector('#restoreFile', { state: 'attached' });
     await page.setInputFiles('#restoreFile', file);
     await page.fill('#restoreForm [name=pass]', passphrase);
@@ -283,7 +283,7 @@ await run('loadout', async (env) => {
   assert.match(await signIn(G, false), /wrong username or password|no relay/i, 'the account is gone from the relay');
   await G.ctx.close();
   const H = await dev('H');
-  await H.goto(SETTINGS);
+  await H.goto(`${SETTINGS}#backup`);
   await H.waitForSelector('#restoreFile', { state: 'attached' });
   await H.setInputFiles('#restoreFile', file);
   await H.fill('#restoreForm [name=pass]', 'backup passphrase 1');
@@ -351,7 +351,7 @@ await run('loadout', async (env) => {
   await until(async () => (await texts(K, '#active .text')).includes('bread'), 'item added');
   await sleep(1200);
   assert.equal(await K.textContent('#sync .wjs-status-text'), '1/2', 'nothing counts as unsynced while one relay has it');
-  await K.goto(SETTINGS);
+  await K.goto(`${SETTINGS}#relays`);
   await K.waitForSelector('#relayList li');
   await until(async () => (await texts(K, '#relayList li')).some((x) => /waiting/.test(x)), 'the dead relay shows what it is missing');
   await K.click('[data-act=sync-now]');
@@ -505,7 +505,7 @@ await run('loadout', async (env) => {
   assert.notEqual(await DE.textContent('#newBoard [type=submit]'), 'Create');
   await DE.press('#newBoard input[name=title]', 'Escape');
   // Switching back happens on the site's settings page and reaches Loadout.
-  await DE.goto(SETTINGS);
+  await DE.goto(`${SETTINGS}#device`);
   await DE.waitForSelector('#langSelect');
   await DE.selectOption('#langSelect', 'en');
   await until(async () => (await DE.getAttribute('html', 'lang')) === 'en', 'English after switching');

@@ -77,7 +77,7 @@ await run(
 
     step('theme, language and hidden apps are set once in the settings and apply everywhere');
     const SETTINGS = `${env.base}settings.html`;
-    await A.goto(SETTINGS);
+    await A.goto(`${SETTINGS}#general`);
     await A.waitForSelector('#themeSeg');
     await A.check('#themeSeg input[value=dark]', { force: true });
     await A.selectOption('#langSelect', 'fr');
@@ -97,7 +97,7 @@ await run(
     // Another device of the same account gets the same language and theme from the account.
     await until(async () => (await B.getAttribute('html', 'lang')) === 'fr', 'B follows the account language', 40000);
     await until(async () => (await B.getAttribute('html', 'data-theme')) === 'dark', 'B follows the account theme', 40000);
-    await A.goto(SETTINGS);
+    await A.goto(`${SETTINGS}#device`);
     await A.waitForSelector('#langSelect');
     await A.selectOption('#langSelect', 'en');
     await A.check('#themeSeg input[value=system]', { force: true });
@@ -105,7 +105,7 @@ await run(
     await until(async () => (await B.getAttribute('html', 'lang')) === 'en', 'B back to English', 40000);
 
     step('the app switcher reaches every page from every page, and the back button closes it');
-    await A.goto(SETTINGS);
+    await A.goto(`${SETTINGS}#apps`);
     await A.waitForSelector('#appToggles input[data-app=pongjs]');
     await A.uncheck('#appToggles input[data-app=pongjs]', { force: true });
     await A.goto(`${env.base}loadout/`);
@@ -121,8 +121,11 @@ await run(
     await A.click('#switcher');
     await A.waitForSelector('.switcher.open');
     await A.click('.switcher-apps a[href$="settings.html"]');
+    await A.waitForSelector('#accountBody');
+    assert.ok(A.url().endsWith('settings.html'), 'the switcher opened the settings page, on its first tab');
+    await A.click('[data-tab=general]');
     await A.waitForSelector('#appToggles');
-    assert.ok(A.url().endsWith('settings.html'), 'the switcher opened the settings page');
+    assert.ok(A.url().endsWith('settings.html#general'), 'a tab is a link of its own');
     await A.check('#appToggles input[data-app=pongjs]', { force: true });
 
     step('the start page has the same switcher: back button and Escape close it');
@@ -139,6 +142,45 @@ await run(
     await A.waitForSelector('.switcher.open');
     await A.keyboard.press('Escape');
     await until(async () => !(await A.$('.switcher.open')), 'Escape closes the sheet');
+
+    step('the apps can be put in any order: the first is the large card, every switcher follows, so does the account');
+    await A.goto(`${SETTINGS}#apps`);
+    await A.waitForSelector('#appToggles li[data-id=pongjs] .grip');
+    const appRows = () => A.$$eval('#appToggles li', (els) => els.map((e) => e.dataset.id));
+    assert.equal((await appRows())[0], 'loadout', 'the hub’s own order to begin with');
+    await A.$eval('#appToggles', (el) => window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - 200));
+    const pg = await (await A.$('#appToggles li[data-id=pongjs] .grip')).boundingBox();
+    const firstRow = await (await A.$('#appToggles li:first-child')).boundingBox();
+    await A.mouse.move(pg.x + pg.width / 2, pg.y + pg.height / 2);
+    await A.mouse.down();
+    for (let y = pg.y + pg.height / 2; y > firstRow.y; y -= 8) await A.mouse.move(pg.x + pg.width / 2, y);
+    await A.mouse.move(pg.x + pg.width / 2, firstRow.y - 4);
+    await A.mouse.up();
+    await until(async () => (await appRows())[0] === 'pongjs', 'pongjs dragged to the top');
+    await A.waitForSelector('[data-act=apps-reset]');
+    await A.goto(env.base);
+    await A.waitForSelector('a.feature[data-app=pongjs]');
+    await A.goto(`${env.base}loadout/`);
+    await A.waitForSelector('.home');
+    await A.click('#switcher');
+    await A.waitForSelector('.switcher.open .switcher-apps a');
+    assert.match((await texts(A, '.switcher-apps a'))[1], /pongjs/, 'Loadout’s switcher lists pongjs first after the start page');
+    await A.goBack();
+    await B.goto(env.base);
+    await until(
+      async () => {
+        await B.reload();
+        await B.waitForSelector('#apps');
+        return Boolean(await B.$('a.feature[data-app=pongjs]'));
+      },
+      'the other device has the same order',
+      40000,
+    );
+    await A.goto(`${SETTINGS}#apps`);
+    await A.click('[data-act=apps-reset]');
+    await until(async () => (await appRows())[0] === 'loadout', 'back to the hub’s order');
+    await A.goto(env.base);
+    await A.waitForSelector('a.feature[data-app=loadout]');
 
     step('blocking someone keeps an encrypted list on the account');
     await A.goto(SETTINGS);
@@ -187,7 +229,7 @@ await run(
     await until(async () => (await texts(E, '#friendList li')).some((x) => x.startsWith('No friends yet')), 'E lost A too: friends are mutual', 30000);
 
     step('wiping a device forgets the key and the cached data');
-    await B.goto(SETTINGS);
+    await B.goto(`${SETTINGS}#thisDevice`);
     await B.waitForSelector('[data-act=wipe]');
     B.removeAllListeners('dialog');
     B.on('dialog', (d) => d.accept());

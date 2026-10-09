@@ -16,10 +16,11 @@
     "new-app": "node node_modules/kiwi-framework/scripts/new-app.mjs",
     "vendor": "node scripts/vendor.mjs",
     "test": "node --test \"test/unit/*.test.js\"",
-    "test:e2e": "node test/e2e/loadout.mjs && node test/e2e/hub.mjs && node test/e2e/devboard.mjs && node test/e2e/payload.mjs && node test/e2e/pong.mjs"
+    "test:e2e": "node test/e2e/loadout.mjs && node test/e2e/hub.mjs && node test/e2e/devboard.mjs && node test/e2e/payload.mjs && node test/e2e/pong.mjs",
+    "probe": "node node_modules/kiwi-framework/scripts/blossom-probe.mjs"
   },
   "dependencies": {
-    "kiwi-framework": "git+https://github.com/derlocke-ng/kiwi-framework.git#e9f26d74d8644d7d66a379c75f5a1d417c57c37e"
+    "kiwi-framework": "git+https://github.com/derlocke-ng/kiwi-framework.git#6f2fc7a24ccb80490193ed51432a145886577acf"
   },
   "devDependencies": {
     "gun": "0.2020.1241",

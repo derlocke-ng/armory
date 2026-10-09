@@ -14,6 +14,9 @@
 //            is this hub's route (<id>/) and the i18n key of its card text
 //            (hub.<id>.text in locales/). `space` is the community a feed or
 //            market serves; null until spaces exist.
+//   media    the default media (Blossom) servers for photos, first choice
+//            first, until a user picks their own in the settings (Network,
+//            Media servers, where each one can be checked)
 //   policy   userMounts: may a user follow a space this hub does not ship?
 export const DISTRIBUTION = {
   id: 'armory',
@@ -24,6 +27,7 @@ export const DISTRIBUTION = {
   homepage: 'https://derlocke-ng.github.io/armory/',
   repo: 'https://github.com/derlocke-ng/armory',
   relays: ['wss://nos.lol', 'wss://relay.damus.io', 'wss://nostr.mom', 'wss://relay.primal.net'],
+  media: ['https://blossom.primal.net', 'https://blossom.band', 'https://nostr.download', 'https://24242.io', 'https://blossom.yakihonne.com', 'https://nostrcheck.me/media'],
   policy: { userMounts: false },
   apps: [
     { id: 'loadout', name: 'Loadout', icon: 'list-checks', tags: ['nostr', 'E2EE', 'offline-first', 'markdown'] },
