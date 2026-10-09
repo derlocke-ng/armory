@@ -1,7 +1,7 @@
 // Offline support: the app shell is cached on install. Requests go to the
 // network first so updates show up right away, and fall back to the cache
 // when offline (e.g. in a supermarket basement). Bump VERSION on release.
-const VERSION = 'loadout-v10';
+const VERSION = 'loadout-v11';
 const SHELL = [
   './',
   'index.html',
@@ -17,10 +17,7 @@ const SHELL = [
   'js/config.js',
   'js/heal.js',
   'js/identity.js',
-  'js/items.js',
   'js/links.js',
-  'js/markdown.js',
-  'js/mdtasks.js',
   'js/net.js',
   'js/session.js',
   'js/settings.js',
@@ -52,10 +49,14 @@ const SHELL = [
   '../shared/ui.js',
   '../shared/appshell.js',
   '../shared/status.js',
+  '../shared/widgets.css',
+  '../shared/items.js',
+  '../shared/mdtasks.js',
+  '../shared/markdown.js',
+  '../shared/marked.esm.js',
+  '../shared/purify.es.mjs',
+  '../shared/qrcode.mjs',
   '../shared/locales/en.json',
-  'vendor/marked.esm.js',
-  'vendor/purify.es.mjs',
-  'vendor/qrcode.mjs',
 ];
 
 self.addEventListener('install', (e) => {

@@ -1,4 +1,4 @@
-import qrcode from '../../vendor/qrcode.mjs';
+import qrcode from '../../../shared/qrcode.mjs';
 import { app } from '../app.js';
 import { shareLink } from '../links.js';
 import { $, icon, modal, copyText, toast } from '../ui.js';

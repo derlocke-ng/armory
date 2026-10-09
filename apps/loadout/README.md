@@ -80,7 +80,7 @@ In the app, add `ws://localhost:7777` under *Account → Relays*.
 ```sh
 npm test                       # unit tests (node --test)
 node test/e2e/loadout.mjs      # 17 multi-device browser scenarios against a throwaway relay (needs Chromium)
-npm run vendor                 # refresh vendor/, ../shared/nostr.mjs and icons.svg after bumping versions
+npm run vendor                 # refresh icons.svg after bumping lucide-static
 ```
 
 When you add a file under `js/`, list it in `SHELL` in `sw.js` (a unit test checks) and bump `VERSION` on release. New UI text goes into `locales/en.json` first and then into every other language file; `t('key', { n })` picks plural forms by CLDR category.
@@ -94,7 +94,7 @@ When you add a file under `js/`, list it in `SHELL` in `sw.js` (a unit test chec
 | `js/boards.js` | board model: keys, encryption, reads and writes (`30701`–`30703`) |
 | `js/heal.js` | which authors this device puts back on the relays |
 | `js/session.js` | carrying boards over when the site's identity changed |
-| `js/links.js`, `js/items.js`, `js/mdtasks.js`, `js/backup.js` | pure logic, unit tested |
+| `js/links.js` | share links and routes: pure logic, unit tested |
 | `js/views/` | home, board, list, note, share and account screens |
 | `locales/` | one JSON catalog per language (keys shared with `../shared/locales/`); `npm test` checks they match English |
-| `vendor/` | marked, DOMPurify, qrcode-generator (see `vendor/LICENSES.md`); nostr lives in `../shared/nostr.mjs` |
+| `../shared/` | from kiwi-framework: the list logic (`items.js`), markdown (`markdown.js`, `mdtasks.js`, marked, DOMPurify), the QR encoder, nostr, and the list, note and editor styles (`widgets.css`) |

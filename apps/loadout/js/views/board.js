@@ -4,7 +4,7 @@ import { healBoard } from '../heal.js';
 import { boardHash, parseBoardInput } from '../links.js';
 import { $, icon, toast, openMenu, confirmDialog, copyText, download, safeFilename, modal } from '../ui.js';
 import { h } from '../util.js';
-import { listToMarkdown } from '../items.js';
+import { listToMarkdown } from '../../../shared/items.js';
 import { LIMITS } from '../config.js';
 import { t, tErr } from '../../../shared/i18n.js';
 import { mountList } from './list.js';

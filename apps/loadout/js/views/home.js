@@ -1,7 +1,7 @@
 import { app } from '../app.js';
 import { Board, createBoard } from '../boards.js';
 import { parseBoardInput, boardHash } from '../links.js';
-import { parseItemText, splitLines, endOrders } from '../items.js';
+import { parseItemText, splitLines, endOrders } from '../../../shared/items.js';
 import { icon, modal, toast } from '../ui.js';
 import { h, store } from '../util.js';
 import { LIMITS } from '../config.js';

@@ -1,5 +1,5 @@
-import { renderMarkdown } from '../markdown.js';
-import { toggleTask } from '../mdtasks.js';
+import { renderMarkdown } from '../../../shared/markdown.js';
+import { toggleTask } from '../../../shared/mdtasks.js';
 import { $, $$, icon, toast } from '../ui.js';
 import { debounce, h } from '../util.js';
 import { t, tErr, relTime } from '../../../shared/i18n.js';

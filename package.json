@@ -19,15 +19,12 @@
     "test:e2e": "node test/e2e/loadout.mjs && node test/e2e/hub.mjs && node test/e2e/devboard.mjs && node test/e2e/payload.mjs && node test/e2e/pong.mjs"
   },
   "dependencies": {
-    "kiwi-framework": "git+https://github.com/derlocke-ng/kiwi-framework.git#v0.2.0"
+    "kiwi-framework": "git+https://github.com/derlocke-ng/kiwi-framework.git#d7febae618e23b1b32781a50bdbff03c665ec3f9"
   },
   "devDependencies": {
-    "dompurify": "3.4.16",
     "gun": "0.2020.1241",
     "lucide-static": "1.52.0",
-    "marked": "18.1.0",
     "nostr-tools": "^2.25.2",
-    "playwright-core": "1.63.0",
-    "qrcode-generator": "2.0.4"
+    "playwright-core": "1.63.0"
   }
 }

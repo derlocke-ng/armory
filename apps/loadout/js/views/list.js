@@ -1,6 +1,6 @@
 import { app } from '../app.js';
-import { parseItemText, splitLines, sortItems, stats, isHeader, headerText, between, endOrders, formatQty } from '../items.js';
-import { renderInline } from '../markdown.js';
+import { parseItemText, splitLines, sortItems, stats, isHeader, headerText, between, endOrders, formatQty } from '../../../shared/items.js';
+import { renderInline } from '../../../shared/markdown.js';
 import { $, icon, toast, confirmDialog } from '../ui.js';
 import { h } from '../util.js';
 import { t, tErr } from '../../../shared/i18n.js';

@@ -30,7 +30,7 @@ locales/<lang>.json  this hub's own strings: title, lead, footer, one card text 
 apps/<id>/           one folder per tool (served at /<id>/)
 public/              optional: files copied over the site root (favicon, CNAME)
 icons.svg            optional: lucide symbols added to the framework's sprite
-scripts/vendor.mjs   Loadout's third-party files and its own icon sprite
+scripts/vendor.mjs   Loadout's own icon sprite
 test/                unit tests (node --test) and end-to-end tests per app
 .github/workflows/   test, build and deploy to GitHub Pages
 ```
@@ -64,7 +64,7 @@ npm run build && npm run serve # the full site, as deployed
 npm run relay:nostr            # local nostr relay on ws://localhost:7777 (data in .nostr/)
 npm run relay                  # local gun relay on http://localhost:8765/gun (Payload, pongjs)
 npm run test:e2e               # Loadout, the hub, DevBoard, Payload and pongjs in real browsers (needs Chromium)
-npm run vendor                 # rebuild Loadout's vendor files and icon sprite after bumping a version
+npm run vendor                 # rebuild Loadout's icon sprite after bumping lucide-static
 ```
 
 In Loadout, add `ws://localhost:7777` under *Account → Relays* to work against the local relay.
@@ -77,4 +77,4 @@ GitHub Pages, built by `.github/workflows/deploy.yml` on every push to `main` (p
 
 ## License
 
-[GPL-3.0-or-later](LICENSE). EnigmaJS, the one legacy app, keeps its own license: PolyForm Noncommercial 1.0.0 (see its folder). Third-party code is listed in the framework's `shared/LICENSES.md` and in `apps/loadout/vendor/LICENSES.md`.
+[GPL-3.0-or-later](LICENSE). EnigmaJS, the one legacy app, keeps its own license: PolyForm Noncommercial 1.0.0 (see its folder). Third-party code is listed in the framework's `shared/LICENSES.md`; Loadout's icon sprite is Lucide (ISC).
