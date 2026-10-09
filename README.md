@@ -35,7 +35,7 @@ test/                unit tests (node --test) and end-to-end tests per app
 .github/workflows/   test, build and deploy to GitHub Pages
 ```
 
-Everything else comes from the framework in `node_modules/kiwi-framework`: the library every app imports (`shared/`, served at `/shared/`), the start page, the settings and account pages, the service worker, the icon sprite, the build and the scaffolder. `npm run build` assembles `_site/`: the hub at the root, the library in `shared/`, this file's config in place of the framework's, the strings merged, every app copied (or built, for Vite apps such as EnigmaJS), and a service worker whose version is a hash of what it precaches.
+Everything else comes from the framework in `node_modules/kiwi-framework`: the start page, the settings and account pages (React and TypeScript, built with Vite), the React layer apps use (`ui/`), the library underneath (`shared/`, also served at `/shared/` for the apps not yet ported), the service worker, the icon sprite, the dev server, the build and the scaffolder. `npm run build` assembles `_site/`: the hub at the root, the library in `shared/`, this file's config in place of the framework's, the strings merged, every app copied (or built, for Vite apps such as EnigmaJS), and a service worker whose version is a hash of what it precaches.
 
 ## Adding an app
 
@@ -49,7 +49,7 @@ That scaffolds `apps/outpost/` (page, script on the shared core and app shell, s
 
 Armory is a GitHub template repository: **Use this template** gives you a copy without Armory's history, a fork keeps it; both work. Then:
 
-1. `distribution.js`: id, name, mark, description, homepage and repository, relays, the apps you keep and the mounts you show.
+1. `distribution.js`: id, name, mark, description, homepage and repository, relays, the apps you keep and the mounts you show. One app can be mounted several times under different ids and names (two markets, two feeds); each mount gets its own route, card and switcher entry, and a card text `hub.<mount id>.text` in `locales/`.
 2. `locales/*.json`: title, lead, footer and one card text per mount, in the languages you care about (English is the fallback).
 3. `kiwi.manifest`: your hub's name and description. Add a line for it to [kiwi-web-catalog](https://github.com/derlocke-ng/kiwi-web-catalog) if you want other hubs to find your apps.
 4. In the repository settings set **Pages → Source** to **GitHub Actions**, then push: the workflow builds and deploys your hub. Users of your hub and of this one share nothing by default but the protocol; they meet on the relays they both use. The model (framework, distributions, apps; spaces and mounts; federation) is in the framework's [`docs/architecture.md`](https://github.com/derlocke-ng/kiwi-framework/blob/main/docs/architecture.md).
@@ -59,7 +59,7 @@ Armory is a GitHub template repository: **Use this template** gives you a copy w
 ```sh
 npm install
 npm test                       # unit tests (they assemble the site into a temp folder)
-npm run dev                    # assemble _site/ without the Vite apps and serve it on http://localhost:8080/
+npm run dev                    # the hub with hot reload on http://localhost:5173/, apps under /<id>/
 npm run build && npm run serve # the full site, as deployed
 npm run relay:nostr            # local nostr relay on ws://localhost:7777 (data in .nostr/)
 npm run relay                  # local gun relay on http://localhost:8765/gun (Payload, pongjs)

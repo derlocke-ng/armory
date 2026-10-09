@@ -125,6 +125,21 @@ await run(
     assert.ok(A.url().endsWith('settings.html'), 'the switcher opened the settings page');
     await A.check('#appToggles input[data-app=pongjs]', { force: true });
 
+    step('the start page has the same switcher: back button and Escape close it');
+    await A.goto(env.base);
+    await A.waitForSelector('#switcher');
+    await A.click('#switcher');
+    await A.waitForSelector('.switcher.open .switcher-apps a');
+    const hubLinks = await texts(A, '.switcher-apps a');
+    assert.ok(hubLinks.some((x) => /Settings/.test(x)) && hubLinks.some((x) => /Loadout/.test(x)), `the start page's switcher lists the pages: ${hubLinks.join(', ')}`);
+    await A.goBack();
+    await until(async () => !(await A.$('.switcher.open')), 'the back button closes the sheet on the start page');
+    assert.ok(!A.url().includes('settings.html'), 'still on the start page after closing');
+    await A.click('#switcher');
+    await A.waitForSelector('.switcher.open');
+    await A.keyboard.press('Escape');
+    await until(async () => !(await A.$('.switcher.open')), 'Escape closes the sheet');
+
     step('blocking someone keeps an encrypted list on the account');
     await A.goto(SETTINGS);
     await A.waitForSelector('#blockForm');
