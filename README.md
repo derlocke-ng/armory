@@ -1,0 +1,74 @@
+# Armory
+
+Peer-to-peer webtools over [nostr](https://nostr.com). Every tool runs entirely in the browser and syncs over relays you choose: no sign-up needed, no server of ours, no tracking, and everything is encrypted before it leaves your device. Install it as a web app from the landing page.
+
+Armory is a **distribution** of [kiwi-framework](https://github.com/derlocke-ng/kiwi-framework): the framework is the engine, the hub pages and the app kit; this repository is one hub built with it, and the template to fork for your own. It is part of the [Kiwi Network](https://kiwi-network.eu). It used to be called weaponized.js.
+
+**Live:** <https://derlocke-ng.github.io/armory/>
+
+| Tool | What it does | Built with |
+|---|---|---|
+| [**Loadout**](apps/loadout) · [open](https://derlocke-ng.github.io/armory/loadout/) | Shared grocery/to-do lists, household inventory and markdown notes across devices; end-to-end encrypted, rentry-style links, survives relays forgetting | nostr, AES-GCM |
+| [**Payload**](apps/payload) · [open](https://derlocke-ng.github.io/armory/payload/) | Send files straight to another online browser; every 64 KB piece checked with SHA-256 | gun signaling, WebRTC (moving to nostr) |
+| [**pongjs**](apps/pongjs) · [open](https://derlocke-ng.github.io/armory/pongjs/) | Two-player Pong between browsers: link, QR or open-games lobby | gun signaling, WebRTC (moving to nostr) |
+| [EnigmaJS](apps/enigmajs) · [open](https://derlocke-ng.github.io/armory/enigmajs/) | Encrypted, ephemeral group chat rooms | gun, SEA, Vue + Vite |
+| [DevBoard](apps/devboard) · [open](https://derlocke-ng.github.io/armory/devboard/) | Freelancer noticeboard: signed notes with proof of work, votes, reports, expiry; the hub's account and block list | nostr, NIP-13, NIP-25, NIP-56 |
+
+Coming: **Uplink** (chat between accounts and ephemeral rooms) and **Outpost** (grow reports with an Instagram-style feed, and a marketplace for seeds). EnigmaJS is legacy and goes once Uplink exists.
+
+**One account, one settings page.** Sign in or create an account on the landing page (username + password, or a nostr key) and every tool uses it; boards made on a device before signing in are carried over. Without an account each device simply uses its own key. The hub's settings page holds everything that is not specific to one tool: account and key export, relays with live status, proof of work, backup and restore of everything your devices know, language and appearance (which follow your account), hidden apps, people (friends and circles), and wiping the device. Each tool keeps only its own settings.
+
+Every page is translated: English, German, French, Spanish, Italian, Dutch, Polish and Portuguese, picked from the browser's language with a one-time prompt. Adding a language is one JSON file per app plus one in `locales/`.
+
+## Layout
+
+```
+distribution.js      what this hub is: name and mark, default relays, policy, the apps
+                     it ships and the mounts it shows (the one file a fork changes)
+locales/<lang>.json  this hub's own strings: title, lead, footer, one card text per mount
+apps/<id>/           one folder per tool (served at /<id>/)
+public/              optional: files copied over the site root (favicon, CNAME)
+icons.svg            optional: lucide symbols added to the framework's sprite
+scripts/vendor.mjs   Loadout's third-party files and its own icon sprite
+test/                unit tests (node --test) and end-to-end tests per app
+.github/workflows/   test, build and deploy to GitHub Pages
+```
+
+Everything else comes from the framework in `node_modules/kiwi-framework`: the library every app imports (`shared/`, served at `/shared/`), the start page, the settings and account pages, the service worker, the icon sprite, the build and the scaffolder. `npm run build` assembles `_site/`: the hub at the root, the library in `shared/`, this file's config in place of the framework's, the strings merged, every app copied (or built, for Vite apps such as EnigmaJS), and a service worker whose version is a hash of what it precaches.
+
+## Adding an app
+
+```sh
+npm run new-app -- outpost "Outpost" sprout     # id, name, a lucide symbol id from the sprite
+```
+
+That scaffolds `apps/outpost/` (page, script on the shared core and app shell, settings view, strings in every language), registers and mounts the app in `distribution.js`, adds its card text to `locales/` and draws its favicon. The start page, the switcher, the Apps toggles, the top bar and the service worker then know it, and the app gets the account's friends, circles and sharing (`shell.people`) and block list (`shell.blocks`) from the shell. What remains is the app itself, its translations and a browser test; `npm run icons` redraws favicons after an icon change, and `npm test` tells you when something is stale.
+
+## Forking
+
+Fork the repository, change `distribution.js` (id, name, mark, relays, apps, mounts) and `locales/`, drop or add apps, and push: the workflow builds and deploys your hub. Users of your hub and of this one share nothing by default but the protocol; they meet on the relays they both use. The model (framework, distributions, apps; spaces and mounts; federation) is in the framework's [`docs/architecture.md`](https://github.com/derlocke-ng/kiwi-framework/blob/main/docs/architecture.md).
+
+## Development
+
+```sh
+npm install
+npm test                       # unit tests (they assemble the site into a temp folder)
+npm run dev                    # assemble _site/ without the Vite apps and serve it on http://localhost:8080/
+npm run build && npm run serve # the full site, as deployed
+npm run relay:nostr            # local nostr relay on ws://localhost:7777 (data in .nostr/)
+npm run relay                  # local gun relay on http://localhost:8765/gun (Payload, pongjs)
+npm run test:e2e               # Loadout, the hub, DevBoard, Payload and pongjs in real browsers (needs Chromium)
+npm run vendor                 # rebuild Loadout's vendor files and icon sprite after bumping a version
+```
+
+In Loadout, add `ws://localhost:7777` under *Account → Relays* to work against the local relay.
+
+The framework is pinned in `package.json` to one commit or release tag of kiwi-framework (`github:derlocke-ng/kiwi-framework#<tag or sha>`); bump it deliberately and run the tests. To work on both at once, point it at a checkout: `npm install ../kiwi-framework`.
+
+## Deployment
+
+GitHub Pages, built by `.github/workflows/deploy.yml` on every push to `main` (pull requests only run the tests and the build). In the repository settings set **Pages → Source** to **GitHub Actions**.
+
+## License
+
+[GPL-3.0-or-later](LICENSE). EnigmaJS, the one legacy app, keeps its own license: PolyForm Noncommercial 1.0.0 (see its folder). Third-party code is listed in the framework's `shared/LICENSES.md` and in `apps/loadout/vendor/LICENSES.md`.

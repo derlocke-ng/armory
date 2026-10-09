@@ -1,0 +1,11 @@
+{
+  "hub.title": "Peer-to-Peer-Webtools, bewaffnet mit <a href=\"https://nostr.com\" rel=\"noopener\">nostr</a>.",
+  "hub.lead": "Jedes Tool hier läuft komplett in deinem Browser und synchronisiert über Relays, die du auswählst. Keine Registrierung nötig, kein Server von uns, kein Tracking – und verschlüsselt wird, bevor etwas dein Gerät verlässt.",
+  "hub.footer": "Freie Software unter der GPL – siehe das <a href=\"https://github.com/derlocke-ng/armory\" rel=\"noopener\">Repository</a>.",
+  "hub.relaysText": "Loadout und DevBoard synchronisieren über diese nostr-Relays; eigene wählst du in den Einstellungen. Payload und pongjs signalisieren noch über öffentliche gun-Relays, bis auch sie zu nostr wechseln. Relays reichen Daten weiter; was vorher verschlüsselt wurde, können sie nicht lesen.",
+  "hub.loadout.text": "Einkaufslisten, To-dos, Haushaltsinventar und Markdown-Notizen, die zwischen all deinen Geräten und allen, mit denen du sie teilst, synchron bleiben – Links wie bei rentry, Ende-zu-Ende verschlüsselt. Funktioniert offline, und deine Geräte stellen wieder her, was die Relays vergessen.",
+  "hub.payload.text": "Schick Dateien direkt in einen anderen Browser, während ihr beide online seid. Direkt per WebRTC, wenn möglich, sonst verschlüsselt über ein Relay; jedes 64-KB-Stück wird mit SHA-256 geprüft.",
+  "hub.pongjs.text": "Retro-Pong für zwei Spieler zwischen zwei Browsern. Teile einen Link oder QR-Code oder such dir ein offenes Spiel aus und spiel über eine Direktverbindung.",
+  "hub.enigmajs.text": "Verschlüsselte Gruppenchats, die verschwinden, wenn der Raum geschlossen wird. Code oder QR teilen und losreden.",
+  "hub.devboard.text": "Ein Schwarzes Brett für Freelancer: Schreib, dass du Leute suchst oder verfügbar bist – mit deinem Schlüssel signiert, mit Proof of Work abgesichert, von anderen bewertet, weg, wenn es abläuft."
+}

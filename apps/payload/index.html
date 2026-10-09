@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src https: wss: http://localhost:* ws://localhost:* http://127.0.0.1:* ws://127.0.0.1:*; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="Send files straight from one browser to another: end-to-end encrypted, every chunk checked with SHA-256, connected over gun.js.">
+  <meta name="theme-color" content="#f6f6f3" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0e0f0d" media="(prefers-color-scheme: dark)">
+  <title>Payload — browser-to-browser file transfer</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="stylesheet" href="payload.css">
+  <script defer src="../shared/gun.js"></script>
+  <script type="module" src="payload.js"></script>
+</head>
+<body>
+  <header id="top"></header>
+  <main id="main" class="main">
+    <noscript><p>Payload needs JavaScript.</p></noscript>
+  </main>
+  <footer class="foot"><a href="../">Armory</a> · direct over WebRTC, found each other over <a href="https://gun.eco" rel="noopener">gun</a></footer>
+</body>
+</html>

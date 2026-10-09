@@ -1,0 +1,32 @@
+{
+  "name": "armory",
+  "private": true,
+  "type": "module",
+  "description": "Armory: a hub of peer-to-peer webtools on nostr, built on kiwi-framework. Shared lists, file drops, a noticeboard and games, all in the browser, synced over relays you choose.",
+  "license": "GPL-3.0-or-later",
+  "repository": "github:derlocke-ng/armory",
+  "homepage": "https://derlocke-ng.github.io/armory/",
+  "scripts": {
+    "build": "node node_modules/kiwi-framework/scripts/build-site.mjs",
+    "serve": "node node_modules/kiwi-framework/scripts/serve.mjs _site",
+    "dev": "node node_modules/kiwi-framework/scripts/build-site.mjs --no-legacy && node node_modules/kiwi-framework/scripts/serve.mjs _site",
+    "relay:nostr": "node node_modules/kiwi-framework/scripts/nostr-relay.mjs 7777 .nostr",
+    "relay": "node node_modules/kiwi-framework/scripts/relay.cjs",
+    "icons": "node node_modules/kiwi-framework/scripts/app-icons.mjs",
+    "new-app": "node node_modules/kiwi-framework/scripts/new-app.mjs",
+    "vendor": "node scripts/vendor.mjs",
+    "test": "node --test \"test/unit/*.test.js\"",
+    "test:e2e": "node test/e2e/loadout.mjs && node test/e2e/hub.mjs && node test/e2e/devboard.mjs && node test/e2e/payload.mjs && node test/e2e/pong.mjs"
+  },
+  "dependencies": {
+    "kiwi-framework": "git+https://github.com/derlocke-ng/kiwi-framework.git#3df46ced4e164209c37f4476beb50c29b3a4b8e6"
+  },
+  "devDependencies": {
+    "dompurify": "3.4.16",
+    "lucide-static": "1.52.0",
+    "marked": "18.1.0",
+    "nostr-tools": "^2.25.2",
+    "playwright-core": "1.63.0",
+    "qrcode-generator": "2.0.4"
+  }
+}
