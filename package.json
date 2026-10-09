@@ -19,7 +19,7 @@
     "test:e2e": "node test/e2e/loadout.mjs && node test/e2e/hub.mjs && node test/e2e/devboard.mjs && node test/e2e/payload.mjs && node test/e2e/pong.mjs"
   },
   "dependencies": {
-    "kiwi-framework": "git+https://github.com/derlocke-ng/kiwi-framework.git#4e1f17717026e1f608b9e876585780295a20413e"
+    "kiwi-framework": "git+https://github.com/derlocke-ng/kiwi-framework.git#v0.1.0"
   },
   "devDependencies": {
     "dompurify": "3.4.16",
