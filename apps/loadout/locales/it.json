@@ -102,5 +102,8 @@
   "settings.reset": "Ripristina predefinito",
   "settings.saved": "Impostazioni salvate",
   "share.friends": "Invia ad amici…",
-  "share.received": "{name} ha condiviso “{title}” con te."
+  "share.received": "{name} ha condiviso “{title}” con te.",
+  "loadout.how.boards": "Ogni bacheca è una coppia di chiavi a sé. Chi ha il link di modifica firma le modifiche come la bacheca stessa, e i relay rifiutano qualsiasi altra cosa per quella bacheca.",
+  "loadout.how.links": "I <b>link di modifica</b> contengono la chiave segreta della bacheca, i <b>link di sola lettura</b> solo la chiave di lettura. Ogni titolo, elemento e nota viene cifrato prima di lasciare il tuo browser; indovinando l’indirizzo di una bacheca si ottiene solo testo cifrato.",
+  "loadout.how.wallet": "Aprendo un link, le sue chiavi vengono spostate nel tuo portafoglio e tolte dalla barra degli indirizzi. L’elenco delle tue bacheche, con le loro chiavi, è cifrato con la tua chiave e pubblicato sotto di essa, così i dispositivi su cui hai effettuato l’accesso restano sincronizzati."
 }

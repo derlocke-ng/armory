@@ -101,5 +101,8 @@
   "settings.reset": "Auf Standard zurücksetzen",
   "settings.saved": "Einstellungen gespeichert",
   "share.friends": "An Freunde senden…",
-  "share.received": "{name} hat „{title}“ mit dir geteilt."
+  "share.received": "{name} hat „{title}“ mit dir geteilt.",
+  "loadout.how.boards": "Jedes Board ist ein eigenes Schlüsselpaar. Wer den Link zum Bearbeiten hat, signiert Änderungen als das Board, und Relays weisen alles andere für dieses Board ab.",
+  "loadout.how.links": "<b>Links zum Bearbeiten</b> enthalten den geheimen Schlüssel des Boards, <b>Links zum Ansehen</b> nur den Leseschlüssel. Alle Titel, Einträge und Notizen werden verschlüsselt, bevor sie deinen Browser verlassen; wer die Adresse eines Boards errät, bekommt nur verschlüsselte Daten.",
+  "loadout.how.wallet": "Beim Öffnen eines Links wandern seine Schlüssel aus der Adressleiste in den lokalen Speicher der App. Deine Liste der Boards samt ihren Schlüsseln wird mit deinem eigenen Schlüssel verschlüsselt und darunter veröffentlicht, damit angemeldete Geräte synchron bleiben."
 }

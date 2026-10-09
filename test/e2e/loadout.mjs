@@ -320,6 +320,15 @@ await run('loadout', async (env) => {
   await until(async () => (await texts(G2, '#active .text')).includes('coffee'), 'grocery items after healing', 30000);
   await E2.close();
 
+  step('Loadout’s settings explain boards and links, then the framework’s topics, all translated');
+  await G2.goto(`${APP}#/account`);
+  await G2.waitForSelector('#how');
+  const how = await G2.$$eval('#how li', (els) => els.map((e) => e.textContent.trim()));
+  assert.equal(how.length, 7);
+  assert.ok(how.every((x) => x.length > 40 && !/^(how|loadout)\./.test(x)), how.join(' | '));
+  assert.match(how[1], /Edit links/);
+  await G2.goto(APP);
+
   step('starters stay available, fill a board from their template, and can be hidden');
   await G2.goto(APP);
   await G2.waitForSelector('.starters-row');

@@ -103,5 +103,8 @@
   "settings.reset": "Przywróć domyślne",
   "settings.saved": "Zapisano ustawienia",
   "share.friends": "Wyślij do znajomych…",
-  "share.received": "{name} udostępnił(a) ci „{title}”."
+  "share.received": "{name} udostępnił(a) ci „{title}”.",
+  "loadout.how.boards": "Każda tablica to osobna para kluczy. Kto ma link do edycji, podpisuje zmiany w imieniu tablicy, a przekaźniki odrzucają wszystko inne dla tej tablicy.",
+  "loadout.how.links": "<b>Linki do edycji</b> zawierają klucz prywatny tablicy, <b>linki tylko do odczytu</b> – jedynie klucz do odczytu. Każdy tytuł, pozycja i notatka są szyfrowane, zanim opuszczą Twoją przeglądarkę; kto zgadnie adres tablicy, dostanie tylko szyfrogram.",
+  "loadout.how.wallet": "Otwarcie linku przenosi jego klucze do Twojego portfela i usuwa je z paska adresu. Twoja lista tablic, wraz z ich kluczami, jest szyfrowana Twoim własnym kluczem i publikowana pod nim, dzięki czemu zalogowane urządzenia pozostają zsynchronizowane."
 }

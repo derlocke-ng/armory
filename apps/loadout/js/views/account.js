@@ -7,6 +7,7 @@ import { $, icon, toast } from '../ui.js';
 import { h } from '../util.js';
 import { STARTER_KEYS, starters } from './home.js';
 import { settingsView } from '../../../shared/settingsview.js';
+import { howLines } from '../../../shared/how.js';
 
 export function renderAccount(view) {
   const home = `
@@ -37,7 +38,8 @@ export function renderAccount(view) {
     title: t('app.settings.title', { app: 'Loadout' }),
     backLabel: t('app.backToBoards'),
     cards: [home],
-    how: [1, 2, 3, 4, 5, 6, 7, 8].map((i) => t(`account.how.${i}`)),
+    // Loadout's own parts, then the framework's topics it is built from (shared/how.js)
+    how: howLines(['loadout.how.boards', 'loadout.how.links', 'linkKeys', 'loadout.how.wallet', 'offline', 'relays', 'backup']),
   });
 
   view.addEventListener('click', onClick);

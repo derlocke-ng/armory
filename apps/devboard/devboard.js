@@ -12,6 +12,7 @@ import { AccountSettings } from '../shared/settings.js';
 import { REPORT_TYPES } from '../shared/moderation.js';
 import { minePow, hasPow } from '../shared/pow.js';
 import { settingsView } from '../shared/settingsview.js';
+import { howLines } from '../shared/how.js';
 import { initAppShell } from '../shared/appshell.js';
 import { statusPill } from '../shared/status.js';
 import { t, tErr, relTime } from '../shared/i18n.js';
@@ -233,7 +234,8 @@ function renderSettings(main) {
         <label class="check-row"><input type="checkbox" id="showCollapsed" ${d.showCollapsed ? 'checked' : ''}><span>${h(t('db.settings.showCollapsed'))}</span></label>
       </div>`,
     ],
-    how: [1, 2, 3, 4, 5].map((i) => t(`db.how.${i}`)),
+    // DevBoard's own parts and the framework's topics (shared/how.js)
+    how: howLines(['db.how.1', 'pow', 'db.how.3', 'db.how.4', 'blocks']),
   });
 }
 

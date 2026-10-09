@@ -102,5 +102,8 @@
   "settings.reset": "Repor predefinição",
   "settings.saved": "Definições guardadas",
   "share.friends": "Enviar a amigos…",
-  "share.received": "{name} partilhou “{title}” consigo."
+  "share.received": "{name} partilhou “{title}” consigo.",
+  "loadout.how.boards": "Cada quadro é o seu próprio par de chaves. Quem tem o link de edição assina as alterações como o quadro, e os relays rejeitam tudo o resto para esse quadro.",
+  "loadout.how.links": "Os <b>links de edição</b> transportam a chave secreta do quadro, os <b>links de leitura</b> apenas a chave de leitura. Todos os títulos, itens e notas são encriptados antes de saírem do teu navegador; quem adivinhar o endereço de um quadro só obtém texto cifrado.",
+  "loadout.how.wallet": "Abrir um link move as suas chaves para a tua carteira e tira-as da barra de endereço. A tua lista de quadros, com as suas chaves, é encriptada para a tua própria chave e publicada sob ela, para que os dispositivos com sessão iniciada se mantenham sincronizados."
 }

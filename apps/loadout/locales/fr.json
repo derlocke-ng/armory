@@ -102,5 +102,8 @@
   "settings.reset": "Valeurs par défaut",
   "settings.saved": "Paramètres enregistrés",
   "share.friends": "Envoyer à des amis…",
-  "share.received": "{name} a partagé « {title} » avec vous."
+  "share.received": "{name} a partagé « {title} » avec vous.",
+  "loadout.how.boards": "Chaque tableau est sa propre paire de clés. Quiconque détient le lien de modification signe les changements au nom du tableau, et les relais rejettent tout le reste pour ce tableau.",
+  "loadout.how.links": "Les <b>liens de modification</b> contiennent la clé secrète du tableau, les <b>liens de lecture</b> seulement la clé de lecture. Chaque titre, élément et note est chiffré avant de quitter votre navigateur ; deviner l’adresse d’un tableau ne donne que du texte chiffré.",
+  "loadout.how.wallet": "Ouvrir un lien déplace ses clés dans votre portefeuille et les retire de la barre d’adresse. Votre liste de tableaux, avec leurs clés, est chiffrée avec votre propre clé et publiée sous celle-ci, pour que vos appareils connectés restent synchronisés."
 }

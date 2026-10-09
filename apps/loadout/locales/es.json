@@ -102,5 +102,8 @@
   "settings.reset": "Restablecer",
   "settings.saved": "Ajustes guardados",
   "share.friends": "Enviar a amigos…",
-  "share.received": "{name} ha compartido «{title}» contigo."
+  "share.received": "{name} ha compartido «{title}» contigo.",
+  "loadout.how.boards": "Cada tablero es su propio par de claves. Quien tiene el enlace de edición firma los cambios como el tablero, y los relays rechazan cualquier otra cosa para ese tablero.",
+  "loadout.how.links": "Los <b>enlaces de edición</b> llevan la clave secreta del tablero; los <b>enlaces de lectura</b>, solo la clave de lectura. Cada título, elemento y nota se cifra antes de salir de tu navegador; quien adivine la dirección de un tablero solo obtiene texto cifrado.",
+  "loadout.how.wallet": "Al abrir un enlace, sus claves pasan a tu cartera y desaparecen de la barra de direcciones. Tu lista de tableros, con sus claves, se cifra para tu propia clave y se publica bajo ella, de modo que los dispositivos con sesión iniciada se mantienen sincronizados."
 }

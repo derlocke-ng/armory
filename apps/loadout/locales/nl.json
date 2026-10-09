@@ -101,5 +101,8 @@
   "settings.reset": "Standaard herstellen",
   "settings.saved": "Instellingen opgeslagen",
   "share.friends": "Naar vrienden sturen…",
-  "share.received": "{name} heeft ‘{title}’ met je gedeeld."
+  "share.received": "{name} heeft ‘{title}’ met je gedeeld.",
+  "loadout.how.boards": "Elk bord is een eigen sleutelpaar. Wie de bewerklink heeft, ondertekent wijzigingen namens het bord, en relays weigeren al het andere voor dat bord.",
+  "loadout.how.links": "<b>Bewerklinks</b> bevatten de geheime sleutel van het bord, <b>leeslinks</b> alleen de leessleutel. Elke titel, elk item en elke notitie wordt versleuteld voordat het je browser verlaat; wie het adres van een bord raadt, krijgt alleen versleutelde tekst.",
+  "loadout.how.wallet": "Bij het openen van een link verhuizen de sleutels naar je wallet en uit de adresbalk. Je lijst met borden, inclusief hun sleutels, wordt versleuteld met je eigen sleutel en daaronder gepubliceerd, zodat ingelogde apparaten gesynchroniseerd blijven."
 }

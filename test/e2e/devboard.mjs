@@ -170,6 +170,9 @@ await run(
     assert.ok(B.url().includes('#/settings'), 'the account button opens DevBoard’s settings');
     assert.ok(await B.$('a[href="../settings.html#account"]'), 'the site settings are one link away');
     assert.ok(await B.$('#how'), 'How it works sits in the settings, as in every app');
+    const how = await B.$$eval('#how li', (els) => els.map((e) => e.textContent.trim()));
+    assert.equal(how.length, 5);
+    assert.ok(how.every((x) => x.length > 40 && !/^(how|db)\./.test(x)), `DevBoard's own lines and the framework's topics, translated: ${how.join(' | ')}`);
     assert.equal(await B.$('#board #how'), null);
     await B.check('#defaultsForm input[name=type][value=available]', { force: true });
     await B.waitForSelector('.toast-success');
