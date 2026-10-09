@@ -387,6 +387,108 @@ await run('loadout', async (env) => {
   const shareWraps = await env.relayEvents([{ kinds: [1059] }]);
   assert.ok(!JSON.stringify(shareWraps).includes('Camping'), 'the relay sees only wrapped notes');
 
+  step('dragging rows: down, up, a long list that has to scroll, by touch; every order survives a reload');
+  const R = await dev('R', { viewport: { width: 400, height: 600 }, hasTouch: true });
+  await open(R);
+  await newBoard(R, 'check', 'Order');
+  await R.$eval('#addInput', (input) => {
+    const data = new DataTransfer();
+    data.setData('text', Array.from({ length: 20 }, (_, i) => `row ${i + 1}`).join('\n'));
+    input.dispatchEvent(new ClipboardEvent('paste', { clipboardData: data, bubbles: true, cancelable: true }));
+  });
+  await until(async () => (await R.$$('#active li')).length === 20, 'twenty rows');
+  // the paste is saved in the background; when it is, Loadout says so and scrolls to the last new row: wait for both
+  await R.waitForSelector('.toast-success', { timeout: 15000 });
+  await until(async () => !(await R.$('.toast')), 'the toast is gone', 8000);
+  const rowsNow = () => texts(R, '#active .text');
+  const center = async (sel) => {
+    const b = await (await R.$(sel)).boundingBox();
+    return { x: b.x + b.width / 2, y: b.y + b.height / 2 };
+  };
+  /** Press a row's grip, move to y in small steps, optionally hold there, let go. */
+  async function dragTo(sel, y, holdMs = 0) {
+    const g = await center(`${sel} .grip`);
+    const hit = await R.evaluate(({ x, y }) => {
+      const el = document.elementFromPoint(x, y);
+      return el?.closest('.grip') ? 'grip' : `${el?.tagName}.${el?.className?.baseVal ?? el?.className} under ${el?.closest('[id]')?.id}`;
+    }, g);
+    assert.equal(hit, 'grip', `the press lands on the row's handle (it hit ${hit})`);
+    await R.mouse.move(g.x, g.y);
+    await R.mouse.down();
+    const dir = y < g.y ? -1 : 1;
+    for (let at = g.y; dir * (y - at) > 0; at += dir * 10) await R.mouse.move(g.x, at);
+    await R.mouse.move(g.x, y);
+    for (let t = 0; t < holdMs; t += 50) {
+      await R.mouse.move(g.x, y + (t % 100 ? 1 : 0)); // a finger is never quite still
+      await sleep(50);
+    }
+    await R.mouse.up();
+  }
+  // down two places (the list well below the sticky top bar)
+  const listAt = (y) => R.$eval('#active', (el, at) => window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - at), y);
+  await listAt(150);
+  let target = await center('#active li:nth-child(3)');
+  await dragTo('#active li:nth-child(1)', target.y + 12);
+  await until(async () => (await rowsNow()).slice(0, 3).join('|') === 'row 2|row 3|row 1', 'row 1 dragged down two places');
+  // up one place
+  target = await center('#active li:nth-child(1)');
+  await dragTo('#active li:nth-child(2)', target.y - 12);
+  await until(async () => (await rowsNow()).slice(0, 3).join('|') === 'row 3|row 2|row 1', 'row 3 dragged up one place');
+  // the last row to the top: the page has to scroll while the pointer rests at the top edge
+  await R.$eval('#active li:last-child', (el) => el.scrollIntoView({ block: 'end' }));
+  await dragTo('#active li:last-child', 25, 2500);
+  await until(async () => (await rowsNow())[0] === 'row 20', 'row 20 carried to the top by autoscroll');
+  assert.equal(await R.evaluate(() => document.documentElement.classList.contains('wjs-dragging')), false, 'nothing left over from the drag');
+  // by touch, as on a phone: row 20 back down below row 3
+  await listAt(150);
+  const cdp = await R.ctx.newCDPSession(R);
+  const from = await center('#active li:nth-child(1) .grip');
+  const to = await center('#active li:nth-child(2)');
+  await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: from.x, y: from.y }] });
+  for (let y = from.y; y < to.y + 14; y += 6) {
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: from.x, y }] });
+    await sleep(16);
+  }
+  await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+  await until(async () => (await rowsNow()).slice(0, 2).join('|') === 'row 3|row 20', 'a touch drag moves the row');
+  const saved = (await rowsNow()).join('|');
+  await sleep(1000);
+  await R.reload();
+  await R.waitForSelector('#active li');
+  await until(async () => (await rowsNow()).join('|') === saved, 'the order after a reload is the order that was dragged');
+
+  step('a device whose clock is behind still reorders for everyone');
+  await R.click('[data-act=share]');
+  await R.waitForSelector('#shareUrl');
+  await R.check('input[name=role][value=edit]', { force: true });
+  const orderLink = await R.inputValue('#shareUrl');
+  await R.click('dialog [data-close]');
+  const slow = await device(
+    env,
+    'SLOW',
+    ({ relay, ms }) => {
+      localStorage.setItem('wjs.relays', JSON.stringify([relay]));
+      const real = Date.now;
+      Date.now = () => real() + ms;
+    },
+    { relay: env.nostrUrl, ms: -60_000 },
+    { viewport: { width: 400, height: 600 } },
+  );
+  await slow.goto(orderLink);
+  await until(async () => (await texts(slow, '#active .text')).join('|') === saved, 'the slow device has the list', 20000);
+  const sb = await (await slow.$('#active li:nth-child(2) .grip')).boundingBox();
+  const st = await (await slow.$('#active li:nth-child(1)')).boundingBox();
+  await slow.mouse.move(sb.x + sb.width / 2, sb.y + sb.height / 2);
+  await slow.mouse.down();
+  for (let y = sb.y + sb.height / 2; y > st.y; y -= 8) await slow.mouse.move(sb.x + sb.width / 2, y);
+  await slow.mouse.up();
+  await until(async () => (await texts(slow, '#active .text')).slice(0, 2).join('|') === 'row 20|row 3', 'moved on the slow device');
+  await until(async () => (await rowsNow()).slice(0, 2).join('|') === 'row 20|row 3', 'and on the other device', 20000);
+  await slow.reload();
+  await slow.waitForSelector('#active li');
+  await sleep(1000);
+  assert.equal((await texts(slow, '#active .text')).slice(0, 2).join('|'), 'row 20|row 3', 'kept after a reload, although its clock is a minute behind');
+
   step('a German browser is asked in German and gets a German app; English stays English');
   const DE = await dev('DE', { locale: 'de-DE' });
   await open(DE);

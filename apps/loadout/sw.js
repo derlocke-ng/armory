@@ -1,7 +1,7 @@
 // Offline support: the app shell is cached on install. Requests go to the
 // network first so updates show up right away, and fall back to the cache
 // when offline (e.g. in a supermarket basement). Bump VERSION on release.
-const VERSION = 'loadout-v11';
+const VERSION = 'loadout-v12';
 const SHELL = [
   './',
   'index.html',

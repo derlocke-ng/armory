@@ -19,7 +19,7 @@
     "test:e2e": "node test/e2e/loadout.mjs && node test/e2e/hub.mjs && node test/e2e/devboard.mjs && node test/e2e/payload.mjs && node test/e2e/pong.mjs"
   },
   "dependencies": {
-    "kiwi-framework": "git+https://github.com/derlocke-ng/kiwi-framework.git#d7febae618e23b1b32781a50bdbff03c665ec3f9"
+    "kiwi-framework": "git+https://github.com/derlocke-ng/kiwi-framework.git#e9f26d74d8644d7d66a379c75f5a1d417c57c37e"
   },
   "devDependencies": {
     "gun": "0.2020.1241",
