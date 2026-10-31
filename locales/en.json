@@ -6,6 +6,6 @@
   "hub.loadout.text": "Grocery lists, to-dos, household inventory and markdown notes that sync between all your devices and whoever you share them with — rentry-style links, end-to-end encrypted. Works offline, and your devices put back whatever the relays forget.",
   "hub.payload.text": "Send files straight to another browser while you’re both online. Direct WebRTC when possible, encrypted through a relay otherwise, every 64 KB piece checked with SHA-256.",
   "hub.pongjs.text": "Retro two-player Pong between two browsers. Share a link or QR code or pick an open game, then play over a direct connection.",
-  "hub.enigmajs.text": "Encrypted group chat rooms that vanish when the room closes. Share a code or QR and talk.",
+  "hub.uplink.text": "Messages to your friends, sealed on your device, and live rooms anyone with the link can join that vanish when they empty.",
   "hub.devboard.text": "A freelancer noticeboard: post that you’re hiring or available, signed with your key and backed by proof of work, voted on by peers, gone when it expires."
 }

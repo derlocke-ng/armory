@@ -6,6 +6,6 @@
   "hub.loadout.text": "Listas de la compra, tareas, inventario del hogar y notas en Markdown sincronizados entre todos tus dispositivos y con quien quieras compartirlos: enlaces al estilo rentry, cifrados de extremo a extremo. Funciona sin conexión, y tus dispositivos reponen lo que los relays olvidan.",
   "hub.payload.text": "Envía archivos directamente a otro navegador mientras ambos estáis en línea. WebRTC directo cuando es posible, cifrado a través de un relay si no; cada fragmento de 64 KB se comprueba con SHA-256.",
   "hub.pongjs.text": "Pong retro para dos jugadores entre dos navegadores. Comparte un enlace o un código QR, o elige una partida abierta, y juega por conexión directa.",
-  "hub.enigmajs.text": "Salas de chat cifradas que desaparecen al cerrar la sala. Comparte un código o un QR y habla.",
+  "hub.uplink.text": "Mensajes a tus amigos, sellados en tu dispositivo, y salas en directo a las que entra quien tenga el enlace y que desaparecen al vaciarse.",
   "hub.devboard.text": "Un tablón de anuncios para freelancers: publica que contratas o que estás disponible, firmado con tu clave y respaldado por prueba de trabajo, votado por otros, desaparece al caducar."
 }

@@ -6,6 +6,6 @@
   "hub.loadout.text": "Listy zakupów, zadania, domowy inwentarz i notatki w Markdown synchronizowane między wszystkimi Twoimi urządzeniami i osobami, którym je udostępnisz – linki jak w rentry, szyfrowane end-to-end. Działa offline, a Twoje urządzenia przywracają to, co przekaźniki zapomną.",
   "hub.payload.text": "Wysyłaj pliki prosto do innej przeglądarki, gdy oboje jesteście online. Bezpośrednio przez WebRTC, gdy się da, a w przeciwnym razie zaszyfrowane przez przekaźnik; każdy fragment 64 KB jest sprawdzany przez SHA-256.",
   "hub.pongjs.text": "Retro Pong dla dwóch graczy między dwiema przeglądarkami. Udostępnij link lub kod QR albo wybierz otwartą grę i graj przez bezpośrednie połączenie.",
-  "hub.enigmajs.text": "Szyfrowane pokoje czatu, które znikają po zamknięciu pokoju. Udostępnij kod lub QR i rozmawiaj.",
+  "hub.uplink.text": "Wiadomości do znajomych, zapieczętowane na Twoim urządzeniu, i pokoje na żywo dla każdego z linkiem, znikające, gdy opustoszeją.",
   "hub.devboard.text": "Tablica ogłoszeń dla freelancerów: napisz, że szukasz ludzi albo jesteś dostępny/a – podpisane twoim kluczem, poparte proof of work, oceniane przez innych, znika po wygaśnięciu."
 }

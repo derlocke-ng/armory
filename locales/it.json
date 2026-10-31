@@ -6,6 +6,6 @@
   "hub.loadout.text": "Liste della spesa, cose da fare, inventario di casa e note in Markdown sincronizzati tra tutti i tuoi dispositivi e con chi vuoi: link in stile rentry, cifrati end-to-end. Funziona offline, e i tuoi dispositivi ripristinano ciò che i relay dimenticano.",
   "hub.payload.text": "Invia file direttamente a un altro browser mentre siete entrambi online. WebRTC diretto quando possibile, altrimenti cifrato tramite un relay; ogni blocco da 64 KB è verificato con SHA-256.",
   "hub.pongjs.text": "Pong retrò per due giocatori tra due browser. Condividi un link o un codice QR, oppure scegli una partita aperta, e gioca in connessione diretta.",
-  "hub.enigmajs.text": "Stanze di chat cifrate che spariscono quando la stanza si chiude. Condividi un codice o un QR e parla.",
+  "hub.uplink.text": "Messaggi ai tuoi amici, sigillati sul tuo dispositivo, e stanze dal vivo in cui entra chiunque abbia il link, che spariscono quando si svuotano.",
   "hub.devboard.text": "Una bacheca per freelance: scrivi che cerchi persone o che sei disponibile, firmato con la tua chiave e sostenuto da proof of work, votato dagli altri, sparisce alla scadenza."
 }

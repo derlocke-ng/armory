@@ -65,5 +65,4 @@ test('the site service worker precaches the hub, shared/ and every app without a
   assert.ok(shell.includes('loadout/') && shell.includes('loadout/index.html') && shell.includes('loadout/locales/en.json'), 'Loadout is precached by the site');
   assert.ok(shell.some((f) => /^loadout\/assets\/.+\.js$/.test(f)), 'with its built script');
   assert.ok(!fs.existsSync(path.join(out, 'loadout', 'sw.js')), 'and no worker of its own');
-  assert.ok(!shell.some((f) => f.startsWith('enigmajs/')), 'legacy apps are not precached');
 });

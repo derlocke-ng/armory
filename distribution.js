@@ -38,13 +38,13 @@ export const DISTRIBUTION = {
     { id: 'payload', name: 'Payload', icon: 'send', tags: ['gun', 'WebRTC', 'SHA-256'], framework: 'payload' },
     { id: 'pongjs', name: 'pongjs', icon: 'gamepad-2', tags: ['gun', 'WebRTC', 'canvas'], framework: 'pong' },
     { id: 'devboard', name: 'DevBoard', icon: 'sticky-note', tags: ['nostr', 'proof of work', 'signed notes'], framework: 'notices' },
-    { id: 'enigmajs', name: 'EnigmaJS', icon: 'message-square-lock', tags: ['gun', 'SEA', 'Vue'], legacy: true },
+    { id: 'uplink', name: 'Uplink', icon: 'message-circle', tags: ['nostr', 'NIP-17', 'E2EE', 'ephemeral'], framework: 'chat' },
   ],
   mounts: [
     { id: 'loadout', app: 'loadout', featured: true, isNew: true },
     { id: 'payload', app: 'payload' },
     { id: 'pongjs', app: 'pongjs' },
     { id: 'devboard', app: 'devboard', space: null, isNew: true },
-    { id: 'enigmajs', app: 'enigmajs' },
+    { id: 'uplink', app: 'uplink' },
   ],
 };

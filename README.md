@@ -11,10 +11,10 @@ Armory is a **distribution** of [kiwi-framework](https://github.com/derlocke-ng/
 | [**Loadout**](apps/loadout) · [open](https://derlocke-ng.github.io/armory/loadout/) | Shared grocery/to-do lists, household inventory and markdown notes across devices; end-to-end encrypted, rentry-style links, survives relays forgetting. The framework's boards app, mounted under Armory's name | nostr, AES-GCM, React |
 | [**Payload**](apps/payload) · [open](https://derlocke-ng.github.io/armory/payload/) | Send files straight to another online browser; every 64 KB piece checked with SHA-256. The framework's payload app | gun signaling, WebRTC (moving to nostr), React |
 | [**pongjs**](apps/pongjs) · [open](https://derlocke-ng.github.io/armory/pongjs/) | Two-player Pong between browsers: link, QR or open-games lobby. The framework's pong app | gun signaling, WebRTC (moving to nostr), React, canvas |
-| [EnigmaJS](apps/enigmajs) · [open](https://derlocke-ng.github.io/armory/enigmajs/) | Encrypted, ephemeral group chat rooms | gun, SEA, Vue + Vite |
+| [**Uplink**](apps/uplink) · [open](https://derlocke-ng.github.io/armory/uplink/) | Messages to your friends (NIP-17, sealed on your device) and live rooms anyone with the link can join, gone when they empty. The framework's chat app | nostr, NIP-17, NIP-59, React |
 | [DevBoard](apps/devboard) · [open](https://derlocke-ng.github.io/armory/devboard/) | Freelancer noticeboard: signed notes with proof of work, votes, reports, expiry; the hub's account and block list. The framework's notices app | nostr, NIP-13, NIP-25, NIP-56, React |
 
-Coming, as framework apps under Armory's own names: **Uplink** (the framework's `chat`: messages between accounts and ephemeral rooms), **Outpost** (`feed`: grow reports with an Instagram-style feed) and **Trading Post** (`market`: seeds, cuttings and gear), later a blog. The framework names its apps plainly; a distribution shows them under its names through its mounts. EnigmaJS is legacy and goes once Uplink exists.
+Coming, as framework apps under Armory's own names: **Outpost** (the framework's `feed`: grow reports with an Instagram-style feed) and **Trading Post** (`market`: seeds, cuttings and gear), later a blog. The framework names its apps plainly; a distribution shows them under its names through its mounts. EnigmaJS, the old chat rooms on gun, is retired: Uplink's rooms do what it did, on nostr.
 
 **One account, one settings page.** Sign in or create an account on the landing page (username + password, or a nostr key) and every tool uses it; boards made on a device before signing in are carried over. Without an account each device simply uses its own key. The hub's settings page holds everything that is not specific to one tool, in four tabs: account, people, circles and blocks; language, appearance (light, dark or the system's, and an accent colour: lime, forest, sky, violet, amber, rose or graphite), the apps (show, hide, drag into your order) and proof of work; relays with live status and media servers for photos, each of which can be checked; backup and restore of everything your devices know, and wiping the device. Language, app order and media servers follow your account; appearance is each device's own. Each tool keeps only its own settings.
 
@@ -35,7 +35,7 @@ test/                unit tests (node --test) and end-to-end tests per app
 .github/workflows/   test, build and deploy to GitHub Pages
 ```
 
-Everything else comes from the framework in `node_modules/kiwi-framework`: the start page, the settings and account pages, Loadout, DevBoard, Payload and pongjs (all React and TypeScript, built with Vite), the React layer apps use (`ui/`), the library underneath (`shared/`), the service worker, the icon sprite, the dev server, the build and the scaffolder. `npm run build` assembles `_site/`: the hub at the root, the library in `shared/`, this file's config in place of the framework's, the strings merged, every app built for its route (the framework's apps under Armory's names, our own React apps the same way, EnigmaJS with its own Vite and Vue), and a service worker whose version is a hash of what it precaches.
+Everything else comes from the framework in `node_modules/kiwi-framework`: the start page, the settings and account pages, Loadout, DevBoard, Payload and pongjs (all React and TypeScript, built with Vite), the React layer apps use (`ui/`), the library underneath (`shared/`), the service worker, the icon sprite, the dev server, the build and the scaffolder. `npm run build` assembles `_site/`: the hub at the root, the library in `shared/`, this file's config in place of the framework's, the strings merged, every app built for its route (the framework's apps under Armory's names, our own React apps the same way), and a service worker whose version is a hash of what it precaches.
 
 ## Adding an app
 
@@ -63,7 +63,7 @@ npm run dev                    # the hub with hot reload on http://localhost:517
 npm run build && npm run serve # the full site, as deployed
 npm run relay:nostr            # local nostr relay on ws://localhost:7777 (data in .nostr/)
 npm run relay                  # local gun relay on http://localhost:8765/gun (Payload, pongjs)
-npm run test:e2e               # Loadout, the hub, DevBoard, Payload and pongjs in real browsers (needs Chromium)
+npm run test:e2e               # Loadout, the hub, DevBoard, Payload, pongjs and Uplink in real browsers (needs Chromium)
 ```
 
 In the hub's settings (*Network*), add `ws://localhost:7777` to work against the local relay.
@@ -76,4 +76,4 @@ GitHub Pages, built by `.github/workflows/deploy.yml` on every push to `main` (p
 
 ## License
 
-[GPL-3.0-or-later](LICENSE). EnigmaJS, the one legacy app, keeps its own license: PolyForm Noncommercial 1.0.0 (see its folder). Third-party code is listed in the framework's `shared/LICENSES.md`.
+[GPL-3.0-or-later](LICENSE). Third-party code is listed in the framework's `shared/LICENSES.md`.
