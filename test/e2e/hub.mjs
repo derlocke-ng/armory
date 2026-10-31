@@ -75,11 +75,13 @@ await run(
     await A.waitForSelector('.home');
     await until(async () => (await texts(A, '.board-title')).sort().join('|') === 'Device board|Hub board', 'the carried board reaches A', 20000);
 
-    step('theme, language and hidden apps are set once in the settings and apply everywhere');
+    step('language and hidden apps are set once and follow the account; appearance stays on the device');
     const SETTINGS = `${env.base}settings.html`;
     await A.goto(`${SETTINGS}#general`);
     await A.waitForSelector('#themeSeg');
     await A.check('#themeSeg input[value=dark]', { force: true });
+    await A.check('#accentSeg input[value=sky]', { force: true });
+    assert.equal(await A.getAttribute('html', 'data-accent'), 'sky', 'the accent palette applies at once');
     await A.selectOption('#langSelect', 'fr');
     await until(async () => (await A.getAttribute('html', 'lang')) === 'fr', 'settings page in French');
     await A.uncheck('#appToggles input[data-app=pongjs]', { force: true });
@@ -93,14 +95,18 @@ await run(
     await A.goto(`${env.base}loadout/`);
     await A.waitForSelector('.home');
     assert.equal(await A.getAttribute('html', 'data-theme'), 'dark', 'Loadout follows the theme');
+    assert.equal(await A.getAttribute('html', 'data-accent'), 'sky', 'Loadout follows the accent');
+    assert.notEqual(await A.$eval('html', (el) => getComputedStyle(el).getPropertyValue('--accent').trim()), '#a3e635', 'the accent is no longer the default lime');
     assert.equal(await A.getAttribute('html', 'lang'), 'fr', 'Loadout follows the language');
-    // Another device of the same account gets the same language and theme from the account.
+    // Another device of the same account gets the language from the account, and keeps its own appearance.
     await until(async () => (await B.getAttribute('html', 'lang')) === 'fr', 'B follows the account language', 40000);
-    await until(async () => (await B.getAttribute('html', 'data-theme')) === 'dark', 'B follows the account theme', 40000);
+    assert.equal(await B.getAttribute('html', 'data-theme'), null, 'B keeps its own appearance');
+    assert.equal(await B.getAttribute('html', 'data-accent'), null, 'B keeps its own accent');
     await A.goto(`${SETTINGS}#device`);
     await A.waitForSelector('#langSelect');
     await A.selectOption('#langSelect', 'en');
     await A.check('#themeSeg input[value=system]', { force: true });
+    await A.check('#accentSeg input[value=lime]', { force: true });
     await A.check('#appToggles input[data-app=pongjs]', { force: true });
     await until(async () => (await B.getAttribute('html', 'lang')) === 'en', 'B back to English', 40000);
 
