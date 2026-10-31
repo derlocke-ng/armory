@@ -211,11 +211,16 @@ await run(
     const aKey = await A.textContent('#myNpub');
     assert.match(aKey, /^npub1/);
     await E.goto(SETTINGS);
+    await E.waitForSelector('#nameForm');
+    await E.fill('#nameForm [name=name]', 'Eve');
+    await E.click('#nameForm .btn');
+    await until(async () => (await E.textContent('#accountBody')).includes('Eve'), 'E’s key has a name now');
     await E.waitForSelector('#friendForm');
     await E.fill('#friendForm [name=who]', aKey);
     await E.click('#friendForm .btn');
     await until(async () => (await texts(E, '#requestList li')).some((x) => /request sent/.test(x)), 'E shows the request as sent', 20000);
     await until(async () => (await texts(A, '#requestList li')).some((x) => /wants to be friends/.test(x)), 'A gets the request', 30000);
+    assert.ok((await texts(A, '#requestList li')).some((x) => x.includes('Eve')), 'by name: the name travels with the key');
     await A.click('#requestList [data-accept]');
     await until(async () => (await texts(A, '#friendList li')).some((x) => /Remove/.test(x)), 'A lists E as a friend', 20000);
     await until(async () => (await texts(E, '#friendList li')).some((x) => x.includes(alias)), 'E lists A by name', 30000);
