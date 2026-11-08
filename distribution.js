@@ -19,7 +19,17 @@
 //   media    the default media (Blossom) servers for photos, first choice
 //            first, until a user picks their own in the settings (Network,
 //            Media servers, where each one can be checked)
+//   relays   the hub's own network. Armory is a public hub: public relays,
+//            and a user may replace them. A company's private hub names
+//            relays inside its VPN here instead, locks them (policy.relays:
+//            'locked') and makes its pages wait while none is reachable
+//            (policy.requireHub: true); its apps then work only from inside.
+//   publicRelays  a public area: relays anyone reaches, used by the mounts
+//            marked network: 'public' (a semi-public hub puts its chat there,
+//            so its people can talk to outsiders). Armory has no need for one:
+//            its own network is public already.
 //   policy   userMounts: may a user follow a space this hub does not ship?
+//            relays: 'open' or 'locked'; requireHub: true or false (see relays)
 export const DISTRIBUTION = {
   id: 'armory',
   name: 'Armory',
@@ -32,7 +42,8 @@ export const DISTRIBUTION = {
   // Checked October 2026: the first two take any file (so encrypted photos), blossom.band takes
   // photos only (the unencrypted fallback), primal did not answer a page.
   media: ['https://nostr.download', 'https://blossom.yakihonne.com', 'https://blossom.band', 'https://blossom.primal.net'],
-  policy: { userMounts: false },
+  publicRelays: [],
+  policy: { userMounts: false, relays: 'open', requireHub: false },
   apps: [
     { id: 'loadout', name: 'Loadout', icon: 'list-checks', tags: ['nostr', 'E2EE', 'offline-first', 'markdown'], framework: 'boards' },
     { id: 'payload', name: 'Payload', icon: 'send', tags: ['gun', 'WebRTC', 'SHA-256'], framework: 'payload' },

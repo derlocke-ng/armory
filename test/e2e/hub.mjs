@@ -17,7 +17,11 @@ const { out: site } = await assemble({ distribution: root, out: fs.mkdtempSync(p
 await run(
   'hub',
   async (env) => {
-    const init = (relay) => localStorage.setItem('wjs.relays', JSON.stringify([relay]));
+    const init = (relay) => {
+      localStorage.setItem('wjs.relays', JSON.stringify([relay]));
+      localStorage.setItem('wjs.debug', '1'); // the sync layer logs every publish and answer: printed when a step fails
+    };
+    const syncLogs = (page) => page.logs.filter((l) => l.startsWith('[sync]')).slice(-30).join('\n');
     const dev = (name, options) => device(env, name, init, env.nostrUrl, options);
     const alias = `hub${Date.now().toString(36)}`;
     const pass = 'a long enough password';
@@ -198,8 +202,12 @@ await run(
     await A.fill('#blockForm [name=who]', stranger);
     await A.click('#blockForm .btn');
     await until(async () => (await texts(A, '#blockedList li')).some((x) => /ffff/.test(x)), 'blocked entry listed');
+    // the list shows the entry before the publish lands: give the relay a moment
+    await until(async () => (await env.relayEvents([{ kinds: [10000] }])).length === 1, 'one mute list on the relay', 10000).catch((err) => {
+      console.log(`A's sync log:\n${syncLogs(A)}`);
+      throw err;
+    });
     const muteEvents = await env.relayEvents([{ kinds: [10000] }]);
-    assert.equal(muteEvents.length, 1, 'one mute list on the relay');
     assert.ok(!JSON.stringify(muteEvents[0]).includes(stranger), 'the relay cannot see who is blocked');
     await A.click('#blockedList [data-unblock]');
     await until(async () => !(await texts(A, '#blockedList li')).some((x) => /ffff/.test(x)), 'entry removed');

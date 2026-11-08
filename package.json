@@ -19,7 +19,7 @@
     "probe": "node node_modules/kiwi-framework/scripts/blossom-probe.mjs"
   },
   "dependencies": {
-    "kiwi-framework": "git+https://github.com/derlocke-ng/kiwi-framework.git#898bcb6be29b3ea8eea2bbbb76a4ba7153f1420a"
+    "kiwi-framework": "git+https://github.com/derlocke-ng/kiwi-framework.git#062ce4438c1b43eb42eb02b04f6f03d2f807e080"
   },
   "devDependencies": {
     "gun": "0.2020.1241",

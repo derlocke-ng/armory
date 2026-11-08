@@ -20,6 +20,10 @@ Coming, as framework apps under Armory's own names: **Outpost** (the framework's
 
 Every page is translated: English, German, French, Spanish, Italian, Dutch, Polish and Portuguese, picked from the browser's language with a one-time prompt. Adding a language is one JSON file per app plus one in `locales/`.
 
+Armory is also a container image, `ghcr.io/derlocke-ng/armory` (the `Dockerfile` at the root is the framework's; `.github/workflows/image.yml` pushes it on `main` and on release tags). On a kiwi-node, [kiwi-modules](https://github.com/derlocke-ng/kiwi-modules)' `hub` module runs it behind the node's reverse proxy with the node's own relay (`nostr-relay`), and its `HUB_*` environment decides the relays and policy at start (`hub.local.json`), so this one image is a private hub inside a VPN, a semi-public one, or a public hub.
+
+Armory is a public hub: public relays, open to change in the settings. A fork can be a **private hub** (relays inside its VPN, locked, pages that wait while the network is away) or a **semi-public** one (a chat on public relays beside the hub's own network, so its people talk to outsiders) by setting `relays`, `publicRelays` and `policy` in `distribution.js`; the framework's `docs/architecture.md`, *Hubs*, has the model.
+
 ## Layout
 
 ```
