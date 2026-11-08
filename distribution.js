@@ -11,11 +11,19 @@
 //            legacy marks an app built elsewhere (Vite) that is not precached,
 //            framework names one of the framework's own apps (Loadout is its
 //            boards app); files in apps/<id>/ are laid over it (icons, manifest)
+//   spaces   the communities this hub's boards, feeds and markets serve (the
+//            framework's docs/protocol.md §12): id, name, description, and
+//            optionally owner (a hex pubkey; none: the space is Armory's, its
+//            key derived from Armory's id and its own), relays (the space's
+//            own network; none: the mount's), moderators, adult, langs,
+//            region, rules. Another hub serves the same space by naming its
+//            address (from hub.json) as owner + id.
 //   mounts   what the start page and the switcher show: an app mounted on a
 //            space. A mount may rename the app and change its icon; the id
 //            is this hub's route (<id>/) and the i18n key of its card text
-//            (hub.<id>.text in locales/). `space` is the community a feed or
-//            market serves; null until spaces exist.
+//            (hub.<id>.text in locales/). `space` names one of the spaces
+//            above; an app that serves no community (Loadout, Payload, pong,
+//            the chat) is mounted without one.
 //   media    the default media (Blossom) servers for photos, first choice
 //            first, until a user picks their own in the settings (Network,
 //            Media servers, where each one can be checked)
@@ -48,6 +56,14 @@ export const DISTRIBUTION = {
   // Armory's public relays hold already: each person's relay and inbox lists, nothing else.
   directoryRelays: ['wss://purplepag.es'],
   policy: { userMounts: false, relays: 'open', requireHub: false },
+  spaces: [
+    {
+      id: 'devboard',
+      name: 'DevBoard',
+      description: 'Freelance work: who is hiring, who is available. Signed notes with proof of work; three live notes per person; notes expire.',
+      relays: [],
+    },
+  ],
   apps: [
     { id: 'loadout', name: 'Loadout', icon: 'list-checks', tags: ['nostr', 'E2EE', 'offline-first', 'markdown'], framework: 'boards' },
     { id: 'payload', name: 'Payload', icon: 'send', tags: ['gun', 'WebRTC', 'SHA-256'], framework: 'payload' },
@@ -59,7 +75,7 @@ export const DISTRIBUTION = {
     { id: 'loadout', app: 'loadout', featured: true, isNew: true },
     { id: 'payload', app: 'payload' },
     { id: 'pongjs', app: 'pongjs' },
-    { id: 'devboard', app: 'devboard', space: null, isNew: true },
+    { id: 'devboard', app: 'devboard', space: 'devboard', isNew: true },
     { id: 'uplink', app: 'uplink' },
   ],
 };
