@@ -44,9 +44,9 @@ export const DISTRIBUTION = {
   media: ['https://nostr.download', 'https://blossom.yakihonne.com', 'https://blossom.band', 'https://blossom.primal.net'],
   publicRelays: [],
   // Where relay lists are published and found, so Armory's people reach people on hubs that share no
-  // relay with it. Empty for now: a directory (wss://purplepag.es and the like) is a choice to make
-  // deliberately, since every person's relay list is published there.
-  directoryRelays: [],
+  // relay with it. purplepag.es is the common nostr directory for relay lists. What goes there is what
+  // Armory's public relays hold already: each person's relay and inbox lists, nothing else.
+  directoryRelays: ['wss://purplepag.es'],
   policy: { userMounts: false, relays: 'open', requireHub: false },
   apps: [
     { id: 'loadout', name: 'Loadout', icon: 'list-checks', tags: ['nostr', 'E2EE', 'offline-first', 'markdown'], framework: 'boards' },
