@@ -43,6 +43,10 @@ export const DISTRIBUTION = {
   // photos only (the unencrypted fallback), primal did not answer a page.
   media: ['https://nostr.download', 'https://blossom.yakihonne.com', 'https://blossom.band', 'https://blossom.primal.net'],
   publicRelays: [],
+  // Where relay lists are published and found, so Armory's people reach people on hubs that share no
+  // relay with it. Empty for now: a directory (wss://purplepag.es and the like) is a choice to make
+  // deliberately, since every person's relay list is published there.
+  directoryRelays: [],
   policy: { userMounts: false, relays: 'open', requireHub: false },
   apps: [
     { id: 'loadout', name: 'Loadout', icon: 'list-checks', tags: ['nostr', 'E2EE', 'offline-first', 'markdown'], framework: 'boards' },
