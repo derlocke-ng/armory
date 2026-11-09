@@ -11,7 +11,6 @@
     "serve": "node node_modules/kiwi-framework/scripts/serve.mjs _site",
     "dev": "node node_modules/kiwi-framework/scripts/dev.mjs",
     "relay:nostr": "node node_modules/kiwi-framework/scripts/nostr-relay.mjs 7777 .nostr",
-    "relay": "node node_modules/kiwi-framework/scripts/relay.cjs",
     "icons": "node node_modules/kiwi-framework/scripts/app-icons.mjs",
     "new-app": "node node_modules/kiwi-framework/scripts/new-app.mjs",
     "test": "node --test \"test/unit/*.test.js\"",
@@ -22,7 +21,6 @@
     "kiwi-framework": "git+https://github.com/derlocke-ng/kiwi-framework.git#efaeae36b2b44bcc06075e9f9934e14eff0daf26"
   },
   "devDependencies": {
-    "gun": "0.2020.1241",
     "nostr-tools": "^2.25.2",
     "playwright-core": "1.63.0"
   }

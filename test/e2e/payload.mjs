@@ -1,5 +1,6 @@
 // Payload is kiwi-framework's payload app; its browser suite lives in the framework
-// (test/e2e/payload.mjs) and runs here against Armory's own site.
+// (test/e2e/payload.mjs) and runs here against Armory's own site: links, files to a friend
+// (who finds them in Uplink and under Received), and directly between two pages.
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -10,4 +11,4 @@ import { assemble } from 'kiwi-framework/scripts/build-site.mjs';
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../..');
 const { out: site } = await assemble({ distribution: root, out: fs.mkdtempSync(path.join(os.tmpdir(), 'armory-site-')), legacy: false });
 
-await run('payload', (env) => payloadSuite(env, { app: `${env.base}payload/` }), { webRoot: site });
+await run('payload', (env) => payloadSuite(env, { app: `${env.base}payload/`, settings: `${env.base}settings.html` }), { webRoot: site });
