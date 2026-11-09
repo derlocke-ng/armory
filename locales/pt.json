@@ -11,5 +11,6 @@
   "hub.pongjs.text": "Pong retro para dois jogadores entre dois navegadores. Partilha um link ou código QR, ou escolhe um jogo aberto, e joga por ligação direta, encontrada através dos relays.",
   "hub.uplink.text": "Mensagens aos teus amigos, seladas no teu dispositivo, e salas ao vivo em que entra quem tiver a ligação e que desaparecem quando ficam vazias.",
   "hub.devboard.text": "Um quadro de avisos para freelancers: diga que contrata ou que está disponível, assinado com a sua chave e apoiado por prova de trabalho, votado pelos outros, desaparece quando expira.",
-  "hub.calendar.text": "O teu calendário do teu próprio Nextcloud ou de qualquer servidor CalDAV: os próximos dias, um mês, eventos que se repetem, lembretes. Nada dele vai para os relays; o teu acesso fica selado na tua conta."
+  "hub.calendar.text": "O teu calendário do teu próprio Nextcloud ou de qualquer servidor CalDAV: os próximos dias, um mês, eventos que se repetem, lembretes. Nada dele vai para os relays; o teu acesso fica selado na tua conta.",
+  "hub.authenticator.text": "Códigos de dois fatores para as tuas contas noutros sítios, em cada dispositivo onde inicias sessão. Adiciona uma com o seu código QR, a sua ligação ou uma exportação do Google Authenticator; os segredos estão selados com uma frase-senha própria, que nem a palavra-passe da tua conta abre."
 }
