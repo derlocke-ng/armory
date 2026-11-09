@@ -19,7 +19,7 @@ Pin by commit, never by branch: `npm install git+https://github.com/derlocke-ng/
 
 ## What Armory is
 
-A public hub: public relays a person may replace, `purplepag.es` as the directory for relay lists, no public area (its own network is public already). Mounts: Loadout (`boards`), Outpost (`feed`, on the space `outpost`), Trading Post (`market`, on the space `tradingpost`, `requireAccount: true`, the reason in `hub.tradingpost.account`: a hemp-related marketplace; the owner decided no age check), Payload, pongjs, DevBoard (`notices`, on the space `devboard`), Uplink (`chat`). A new or retired app also changes kiwi-web-catalog's `apps.list`. The card text of a mount is `hub.<mount id>.text` in `locales/*.json`; a new mount needs it in every language.
+A public hub: public relays a person may replace, `purplepag.es` as the directory for relay lists, no public area (its own network is public already). Mounts: Loadout (`boards`), Outpost (`feed`, on the space `outpost`), Trading Post (`market`, on the space `tradingpost`, `requireAccount: true`, the reason in `hub.tradingpost.account`: a hemp-related marketplace; the owner decided no age check; `sellers: { space: 'outpost', posts: 3, likes: 3 }`, the owner's rule: sellers show up in Outpost first or a moderator approves them; `test/e2e/tradingpost.mjs` names a test moderator in the test site's `hub.local.json`), Payload, pongjs, DevBoard (`notices`, on the space `devboard`), Uplink (`chat`). A new or retired app also changes kiwi-web-catalog's `apps.list`. The card text of a mount is `hub.<mount id>.text` in `locales/*.json`; a new mount needs it in every language.
 
 ## Spaces
 

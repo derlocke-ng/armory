@@ -93,8 +93,16 @@ export const DISTRIBUTION = {
   mounts: [
     { id: 'loadout', app: 'loadout', featured: true, isNew: true },
     { id: 'outpost', app: 'outpost', space: 'outpost', isNew: true },
-    // a hemp marketplace: for people with an account here (the reason is hub.tradingpost.account in locales/); no age check
-    { id: 'tradingpost', app: 'tradingpost', space: 'tradingpost', requireAccount: true, isNew: true },
+    // a hemp marketplace: for people with an account here (the reason is hub.tradingpost.account in locales/); no age check.
+    // Sellers have shown up in Outpost first (three posts, each liked by three other people), or a moderator approves them.
+    {
+      id: 'tradingpost',
+      app: 'tradingpost',
+      space: 'tradingpost',
+      requireAccount: true,
+      sellers: { space: 'outpost', posts: 3, likes: 3 },
+      isNew: true,
+    },
     { id: 'payload', app: 'payload' },
     { id: 'pongjs', app: 'pongjs' },
     { id: 'devboard', app: 'devboard', space: 'devboard', isNew: true },
