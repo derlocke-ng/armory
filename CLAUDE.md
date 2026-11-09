@@ -23,4 +23,6 @@ A public hub: public relays a person may replace, `purplepag.es` as the director
 
 ## Spaces
 
+`moderators` in `distribution.js` names Armory's moderators (npubs): the owner's account (derlocke-ng). They moderate every space Armory defines: a report of theirs folds a post, they mark posts 18+ or as an ad, the feed shows them a Reported tab. Add or remove one only when the owner says so.
+
 `spaces` in `distribution.js` lists the communities Armory's boards serve; a mount names one with `space`. Armory's spaces have no owner, so their keys derive from Armory's id and theirs and their definitions are published by Armory's own devices (framework `docs/protocol.md` §12). A fork that wants to serve the same space copies its address from Armory's `hub.json` as `owner` + `id`; a fork that wants its own simply lists its own.

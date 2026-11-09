@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import assert from 'node:assert/strict';
-import { run, device, until } from 'kiwi-framework/test/e2e/env.mjs';
+import { device, run, startBoard, until } from 'kiwi-framework/test/e2e/env.mjs';
 import { assemble } from 'kiwi-framework/scripts/build-site.mjs';
 
 const step = (s) => console.log(`• ${s}`);
@@ -27,7 +27,7 @@ await run(
     const pass = 'a long enough password';
 
     async function newBoard(page, title) {
-      await page.click('[data-new="check"]');
+      await startBoard(page, 'check');
       await page.fill('#newBoard input[name=title]', title);
       await page.click('#newBoard [type=submit]');
       await page.waitForSelector('#boardName', { timeout: 15000 });

@@ -58,6 +58,9 @@ export const DISTRIBUTION = {
   // Armory's public relays hold already: each person's relay and inbox lists, nothing else.
   directoryRelays: ['wss://purplepag.es'],
   policy: { userMounts: false, relays: 'open', requireHub: false },
+  // Armory's moderators: they moderate every space below (Outpost, Trading Post, DevBoard): their report folds a
+  // post for everyone, they mark posts 18+ or as an ad, and they see what people reported. derlocke-ng's account.
+  moderators: ['npub1u8deaf2dp524mjkg42qulxry7ltjcma7s3rmrxqln5f5nwfhxezqee93gu'],
   spaces: [
     {
       id: 'outpost',
