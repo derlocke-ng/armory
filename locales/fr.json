@@ -10,5 +10,6 @@
   "hub.payload.text": "Envoyez des fichiers directement vers un autre navigateur pendant que vous êtes tous deux en ligne. En WebRTC direct quand c’est possible, chiffré via un relais sinon ; chaque morceau de 64 Ko est vérifié en SHA-256.",
   "hub.pongjs.text": "Un Pong rétro à deux joueurs entre deux navigateurs. Partagez un lien ou un code QR, ou choisissez une partie ouverte, puis jouez en connexion directe.",
   "hub.uplink.text": "Des messages à vos amis, scellés sur votre appareil, et des salons en direct ouverts à qui a le lien, qui disparaissent une fois vides.",
-  "hub.devboard.text": "Un tableau d’affichage pour freelances : dites que vous recrutez ou que vous êtes disponible, signé avec votre clé et appuyé par une preuve de travail, voté par les pairs, disparu à l’expiration."
+  "hub.devboard.text": "Un tableau d’affichage pour freelances : dites que vous recrutez ou que vous êtes disponible, signé avec votre clé et appuyé par une preuve de travail, voté par les pairs, disparu à l’expiration.",
+  "hub.calendar.text": "Ton agenda depuis ton propre Nextcloud ou tout serveur CalDAV : les prochains jours, un mois, les événements qui se répètent, des rappels. Rien ne va aux relais ; ton identifiant est scellé dans ton compte."
 }

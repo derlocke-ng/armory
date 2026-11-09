@@ -10,5 +10,6 @@
   "hub.payload.text": "Envia ficheiros diretamente para outro navegador enquanto ambos estão online. WebRTC direto quando possível, cifrado através de um relay caso contrário; cada bloco de 64 KB é verificado com SHA-256.",
   "hub.pongjs.text": "Pong retro para dois jogadores entre dois navegadores. Partilha um link ou código QR, ou escolhe um jogo aberto, e joga por ligação direta.",
   "hub.uplink.text": "Mensagens aos teus amigos, seladas no teu dispositivo, e salas ao vivo em que entra quem tiver a ligação e que desaparecem quando ficam vazias.",
-  "hub.devboard.text": "Um quadro de avisos para freelancers: diga que contrata ou que está disponível, assinado com a sua chave e apoiado por prova de trabalho, votado pelos outros, desaparece quando expira."
+  "hub.devboard.text": "Um quadro de avisos para freelancers: diga que contrata ou que está disponível, assinado com a sua chave e apoiado por prova de trabalho, votado pelos outros, desaparece quando expira.",
+  "hub.calendar.text": "O teu calendário do teu próprio Nextcloud ou de qualquer servidor CalDAV: os próximos dias, um mês, eventos que se repetem, lembretes. Nada dele vai para os relays; o teu acesso fica selado na tua conta."
 }

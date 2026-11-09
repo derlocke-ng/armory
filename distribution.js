@@ -89,6 +89,7 @@ export const DISTRIBUTION = {
     { id: 'pongjs', name: 'pongjs', icon: 'gamepad-2', tags: ['gun', 'WebRTC', 'canvas'], framework: 'pong' },
     { id: 'devboard', name: 'DevBoard', icon: 'sticky-note', tags: ['nostr', 'proof of work', 'signed notes'], framework: 'notices' },
     { id: 'uplink', name: 'Uplink', icon: 'message-circle', tags: ['nostr', 'NIP-17', 'E2EE', 'ephemeral'], framework: 'chat' },
+    { id: 'calendar', name: 'Calendar', icon: 'calendar-days', tags: ['CalDAV', 'Nextcloud', 'iCalendar'], framework: 'calendar' },
   ],
   mounts: [
     { id: 'loadout', app: 'loadout', featured: true, isNew: true },
@@ -107,5 +108,7 @@ export const DISTRIBUTION = {
     { id: 'pongjs', app: 'pongjs' },
     { id: 'devboard', app: 'devboard', space: 'devboard', isNew: true },
     { id: 'uplink', app: 'uplink' },
+    // a person's own calendar on their Nextcloud (or any CalDAV server that allows Armory's origin); nothing of it on nostr
+    { id: 'calendar', app: 'calendar', isNew: true },
   ],
 };

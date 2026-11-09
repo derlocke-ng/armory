@@ -15,11 +15,11 @@
     "icons": "node node_modules/kiwi-framework/scripts/app-icons.mjs",
     "new-app": "node node_modules/kiwi-framework/scripts/new-app.mjs",
     "test": "node --test \"test/unit/*.test.js\"",
-    "test:e2e": "node test/e2e/loadout.mjs && node test/e2e/hub.mjs && node test/e2e/devboard.mjs && node test/e2e/outpost.mjs && node test/e2e/tradingpost.mjs && node test/e2e/payload.mjs && node test/e2e/pong.mjs && node test/e2e/uplink.mjs",
+    "test:e2e": "node test/e2e/loadout.mjs && node test/e2e/hub.mjs && node test/e2e/devboard.mjs && node test/e2e/outpost.mjs && node test/e2e/tradingpost.mjs && node test/e2e/payload.mjs && node test/e2e/pong.mjs && node test/e2e/uplink.mjs && node test/e2e/calendar.mjs",
     "probe": "node node_modules/kiwi-framework/scripts/blossom-probe.mjs"
   },
   "dependencies": {
-    "kiwi-framework": "git+https://github.com/derlocke-ng/kiwi-framework.git#3fd894eba376e4bfd3446e1a715c16150f768dc5"
+    "kiwi-framework": "git+https://github.com/derlocke-ng/kiwi-framework.git#efaeae36b2b44bcc06075e9f9934e14eff0daf26"
   },
   "devDependencies": {
     "gun": "0.2020.1241",

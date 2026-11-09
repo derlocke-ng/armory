@@ -10,5 +10,6 @@
   "hub.payload.text": "Wysyłaj pliki prosto do innej przeglądarki, gdy oboje jesteście online. Bezpośrednio przez WebRTC, gdy się da, a w przeciwnym razie zaszyfrowane przez przekaźnik; każdy fragment 64 KB jest sprawdzany przez SHA-256.",
   "hub.pongjs.text": "Retro Pong dla dwóch graczy między dwiema przeglądarkami. Udostępnij link lub kod QR albo wybierz otwartą grę i graj przez bezpośrednie połączenie.",
   "hub.uplink.text": "Wiadomości do znajomych, zapieczętowane na Twoim urządzeniu, i pokoje na żywo dla każdego z linkiem, znikające, gdy opustoszeją.",
-  "hub.devboard.text": "Tablica ogłoszeń dla freelancerów: napisz, że szukasz ludzi albo jesteś dostępny/a – podpisane twoim kluczem, poparte proof of work, oceniane przez innych, znika po wygaśnięciu."
+  "hub.devboard.text": "Tablica ogłoszeń dla freelancerów: napisz, że szukasz ludzi albo jesteś dostępny/a – podpisane twoim kluczem, poparte proof of work, oceniane przez innych, znika po wygaśnięciu.",
+  "hub.calendar.text": "Twój kalendarz z własnego Nextcloud lub dowolnego serwera CalDAV: najbliższe dni, miesiąc, powtarzające się wydarzenia, przypomnienia. Nic z niego nie trafia do przekaźników; twoje logowanie jest zapieczętowane na twoim koncie."
 }
