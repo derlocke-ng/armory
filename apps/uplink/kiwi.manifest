@@ -1,13 +1,13 @@
 # kiwi.manifest: this app's entry for the Kiwi Network web catalog
 NAME=uplink
-DESCRIPTION=Uplink: messages to your friends (NIP-17, sealed on your device), groups that stay until their host closes them, and live rooms anyone with the link can join, gone when they empty
+DESCRIPTION=Uplink: messages and files to your friends (NIP-17, sealed on your device, files encrypted on Blossom media servers), groups that stay until their host closes them, and live rooms anyone with the link can join, gone when they empty
 VERSION=0.1.0
 CATEGORY=App
 COMPONENTS=web
 FRAMEWORK=kiwi-framework
 ICON=icon.svg
 # the nostr event kinds it reads and writes
-KINDS=14 1059 21700 21710 30720 7820 7821 7822 7823 7824 7825 7826
-TAGS=nostr nip-17 nip-59 e2ee ephemeral
+KINDS=14 15 1059 21700 21710 30720 7820 7821 7822 7823 7824 7825 7826
+TAGS=nostr nip-17 nip-59 e2ee ephemeral files blossom
 HOMEPAGE=https://derlocke-ng.github.io/armory/uplink/
 LICENSE=GPL-3.0-or-later
