@@ -1,0 +1,9 @@
+# Vault
+
+**Live:** <https://derlocke-ng.github.io/armory/vault/>
+
+Vault is kiwi-framework's **vault** app, mounted here (`framework: 'vault'` in [`distribution.js`](../../distribution.js)): a password manager for logins, notes, cards and two-factor codes, on every device you sign in on. A generator beside every password (random characters or a passphrase of words), a health report (weak, reused and year-old passwords; known breaches only if you turn that check on), imports from Bitwarden, KeePass, KeePassXC, the browsers, 1Password, LastPass, Dashlane and Proton Pass, and exports for them.
+
+Everything in it is sealed with a passphrase of its own, which even your account's password does not open: each entry is its own event on the relays, which see how many there are and when they change, nothing else. Authenticator opens the same vault and shows every entry with a 2FA code. A web page cannot fill in other sites' forms: Vault copies the username and password, and opens the site. Its code, browser suite and documentation live in the framework: [`apps/vault`](https://github.com/derlocke-ng/kiwi-framework/tree/main/apps/vault). This folder holds only what Armory lays over it (the favicon) and its catalog entry (`kiwi.manifest`).
+
+`node test/e2e/vault.mjs` runs the framework's suite against Armory's own site, with Authenticator beside it.

@@ -12,5 +12,6 @@
   "hub.uplink.text": "Messaggi ai tuoi amici, sigillati sul tuo dispositivo, e stanze dal vivo in cui entra chiunque abbia il link, che spariscono quando si svuotano.",
   "hub.devboard.text": "Una bacheca per freelance: scrivi che cerchi persone o che sei disponibile, firmato con la tua chiave e sostenuto da proof of work, votato dagli altri, sparisce alla scadenza.",
   "hub.calendar.text": "Il tuo calendario dal tuo Nextcloud o da qualsiasi server CalDAV: i prossimi giorni, un mese, eventi che si ripetono, promemoria. Nulla va ai relay; il tuo accesso è sigillato nel tuo account.",
+  "hub.vault.text": "Un gestore di password: accessi, note, carte e codici a due fattori su ogni dispositivo dove accedi, con un generatore, un rapporto sulla salute e l’importazione da altri gestori. Sigillato da una frase segreta propria, che nemmeno la password del tuo account apre.",
   "hub.authenticator.text": "Codici a due fattori per i tuoi account altrove, su ogni dispositivo dove accedi. Aggiungine uno con il suo codice QR, il suo link o un’esportazione di Google Authenticator; i segreti sono sigillati da una frase segreta propria, che nemmeno la password del tuo account apre."
 }

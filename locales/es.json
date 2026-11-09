@@ -12,5 +12,6 @@
   "hub.uplink.text": "Mensajes a tus amigos, sellados en tu dispositivo, y salas en directo a las que entra quien tenga el enlace y que desaparecen al vaciarse.",
   "hub.devboard.text": "Un tablón de anuncios para freelancers: publica que contratas o que estás disponible, firmado con tu clave y respaldado por prueba de trabajo, votado por otros, desaparece al caducar.",
   "hub.calendar.text": "Tu calendario de tu propio Nextcloud o de cualquier servidor CalDAV: los próximos días, un mes, eventos que se repiten, recordatorios. Nada de él va a los relés; tu acceso queda sellado en tu cuenta.",
+  "hub.vault.text": "Un gestor de contraseñas: accesos, notas, tarjetas y códigos de doble factor en cada dispositivo donde inicias sesión, con generador, informe de salud e importación desde otros gestores. Sellado con su propia frase de contraseña, que ni la contraseña de tu cuenta abre.",
   "hub.authenticator.text": "Códigos de doble factor para tus cuentas en otros sitios, en cada dispositivo donde inicias sesión. Añade una con su código QR, su enlace o una exportación de Google Authenticator; los secretos están sellados con su propia frase de contraseña, que ni la contraseña de tu cuenta abre."
 }

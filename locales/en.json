@@ -12,5 +12,6 @@
   "hub.uplink.text": "Messages to your friends, sealed on your device, and live rooms anyone with the link can join that vanish when they empty.",
   "hub.devboard.text": "A freelancer noticeboard: post that you’re hiring or available, signed with your key and backed by proof of work, voted on by peers, gone when it expires.",
   "hub.calendar.text": "Your calendar from your own Nextcloud or any CalDAV server: the coming days, a month, events that repeat, reminders. Nothing of it goes to relays; your login is sealed in your account.",
+  "hub.vault.text": "A password manager: logins, notes, cards and two-factor codes on every device you sign in on, with a generator, a health report and imports from other managers. Sealed with a passphrase of its own, which even your account’s password does not open.",
   "hub.authenticator.text": "Two-factor codes for your accounts elsewhere, on every device you sign in on. Add one with its QR code, its link or a Google Authenticator export; the secrets are sealed with a passphrase of their own, which even your account’s password does not open."
 }

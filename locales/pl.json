@@ -12,5 +12,6 @@
   "hub.uplink.text": "Wiadomości do znajomych, zapieczętowane na Twoim urządzeniu, i pokoje na żywo dla każdego z linkiem, znikające, gdy opustoszeją.",
   "hub.devboard.text": "Tablica ogłoszeń dla freelancerów: napisz, że szukasz ludzi albo jesteś dostępny/a – podpisane twoim kluczem, poparte proof of work, oceniane przez innych, znika po wygaśnięciu.",
   "hub.calendar.text": "Twój kalendarz z własnego Nextcloud lub dowolnego serwera CalDAV: najbliższe dni, miesiąc, powtarzające się wydarzenia, przypomnienia. Nic z niego nie trafia do przekaźników; twoje logowanie jest zapieczętowane na twoim koncie.",
+  "hub.vault.text": "Menedżer haseł: logowania, notatki, karty i kody dwuskładnikowe na każdym urządzeniu, na którym się logujesz, z generatorem, raportem kondycji i importem z innych menedżerów. Zapieczętowany własną frazą dostępu, której nie otwiera nawet hasło do twojego konta.",
   "hub.authenticator.text": "Kody dwuskładnikowe do twoich kont gdzie indziej, na każdym urządzeniu, na którym się logujesz. Dodaj konto kodem QR, linkiem albo eksportem z Google Authenticator; sekrety są zapieczętowane własną frazą dostępu, której nie otwiera nawet hasło do twojego konta."
 }

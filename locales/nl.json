@@ -12,5 +12,6 @@
   "hub.uplink.text": "Berichten aan je vrienden, verzegeld op je apparaat, en live-kamers waar iedereen met de link in kan en die verdwijnen zodra ze leeg zijn.",
   "hub.devboard.text": "Een prikbord voor freelancers: meld dat je mensen zoekt of beschikbaar bent, ondertekend met je sleutel en gedekt door proof of work, beoordeeld door anderen, weg zodra het verloopt.",
   "hub.calendar.text": "Je agenda uit je eigen Nextcloud of een andere CalDAV-server: de komende dagen, een maand, terugkerende afspraken, herinneringen. Niets ervan gaat naar relays; je aanmelding zit verzegeld in je account.",
+  "hub.vault.text": "Een wachtwoordbeheerder: logins, notities, kaarten en tweestapscodes op elk apparaat waarop je inlogt, met een generator, een gezondheidsrapport en import uit andere beheerders. Verzegeld met een eigen wachtzin, die zelfs het wachtwoord van je account niet opent.",
   "hub.authenticator.text": "Tweestapscodes voor je accounts elders, op elk apparaat waarop je inlogt. Voeg er een toe met de QR-code, de link of een export uit Google Authenticator; de geheimen zijn verzegeld met een eigen wachtzin, die zelfs het wachtwoord van je account niet opent."
 }

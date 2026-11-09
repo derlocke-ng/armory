@@ -14,11 +14,11 @@
     "icons": "node node_modules/kiwi-framework/scripts/app-icons.mjs",
     "new-app": "node node_modules/kiwi-framework/scripts/new-app.mjs",
     "test": "node --test \"test/unit/*.test.js\"",
-    "test:e2e": "node test/e2e/loadout.mjs && node test/e2e/hub.mjs && node test/e2e/devboard.mjs && node test/e2e/outpost.mjs && node test/e2e/tradingpost.mjs && node test/e2e/payload.mjs && node test/e2e/pong.mjs && node test/e2e/uplink.mjs && node test/e2e/calendar.mjs && node test/e2e/authenticator.mjs",
+    "test:e2e": "node test/e2e/loadout.mjs && node test/e2e/hub.mjs && node test/e2e/devboard.mjs && node test/e2e/outpost.mjs && node test/e2e/tradingpost.mjs && node test/e2e/payload.mjs && node test/e2e/pong.mjs && node test/e2e/uplink.mjs && node test/e2e/calendar.mjs && node test/e2e/authenticator.mjs && node test/e2e/vault.mjs",
     "probe": "node node_modules/kiwi-framework/scripts/blossom-probe.mjs"
   },
   "dependencies": {
-    "kiwi-framework": "git+https://github.com/derlocke-ng/kiwi-framework.git#e36268cc6a9fd857782094f4a4bc94173468a35e"
+    "kiwi-framework": "git+https://github.com/derlocke-ng/kiwi-framework.git#6ce1650bbe2a42258c1e6b4cf59f2800e0e25b51"
   },
   "devDependencies": {
     "nostr-tools": "^2.25.2",

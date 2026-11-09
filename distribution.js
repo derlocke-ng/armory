@@ -90,6 +90,7 @@ export const DISTRIBUTION = {
     { id: 'devboard', name: 'DevBoard', icon: 'sticky-note', tags: ['nostr', 'proof of work', 'signed notes'], framework: 'notices' },
     { id: 'uplink', name: 'Uplink', icon: 'message-circle', tags: ['nostr', 'NIP-17', 'E2EE', 'ephemeral'], framework: 'chat' },
     { id: 'calendar', name: 'Calendar', icon: 'calendar-days', tags: ['CalDAV', 'Nextcloud', 'iCalendar'], framework: 'calendar' },
+    { id: 'vault', name: 'Vault', icon: 'vault', tags: ['passwords', 'E2EE', 'TOTP'], framework: 'vault' },
     { id: 'authenticator', name: 'Authenticator', icon: 'shield-check', tags: ['TOTP', 'E2EE', 'QR'], framework: 'authenticator' },
   ],
   mounts: [
@@ -111,7 +112,8 @@ export const DISTRIBUTION = {
     { id: 'uplink', app: 'uplink' },
     // a person's own calendar on their Nextcloud (or any CalDAV server that allows Armory's origin); nothing of it on nostr
     { id: 'calendar', app: 'calendar', isNew: true },
-    // two-factor codes for accounts elsewhere, in the account's settings sealed with a passphrase of their own
+    // a password manager, and its two-factor codes on their own: one vault, sealed with a passphrase of its own
+    { id: 'vault', app: 'vault', isNew: true },
     { id: 'authenticator', app: 'authenticator', isNew: true },
   ],
 };
