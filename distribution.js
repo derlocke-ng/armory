@@ -66,6 +66,12 @@ export const DISTRIBUTION = {
       relays: [],
     },
     {
+      id: 'tradingpost',
+      name: 'Trading Post',
+      description: 'A hemp marketplace: seeds, cuttings and gear, from people with an account on Armory.',
+      relays: [],
+    },
+    {
       id: 'devboard',
       name: 'DevBoard',
       description: 'Freelance work: who is hiring, who is available. Signed notes with proof of work; three live notes per person; notes expire.',
@@ -75,6 +81,7 @@ export const DISTRIBUTION = {
   apps: [
     { id: 'loadout', name: 'Loadout', icon: 'list-checks', tags: ['nostr', 'E2EE', 'offline-first', 'markdown'], framework: 'boards' },
     { id: 'outpost', name: 'Outpost', icon: 'sprout', tags: ['nostr', 'E2EE', 'photos', 'NIP-72'], framework: 'feed' },
+    { id: 'tradingpost', name: 'Trading Post', icon: 'store', tags: ['nostr', 'E2EE', 'photos', 'account'], framework: 'market' },
     { id: 'payload', name: 'Payload', icon: 'send', tags: ['gun', 'WebRTC', 'SHA-256'], framework: 'payload' },
     { id: 'pongjs', name: 'pongjs', icon: 'gamepad-2', tags: ['gun', 'WebRTC', 'canvas'], framework: 'pong' },
     { id: 'devboard', name: 'DevBoard', icon: 'sticky-note', tags: ['nostr', 'proof of work', 'signed notes'], framework: 'notices' },
@@ -83,6 +90,8 @@ export const DISTRIBUTION = {
   mounts: [
     { id: 'loadout', app: 'loadout', featured: true, isNew: true },
     { id: 'outpost', app: 'outpost', space: 'outpost', isNew: true },
+    // a hemp marketplace: for people with an account here (the reason is hub.tradingpost.account in locales/); no age check
+    { id: 'tradingpost', app: 'tradingpost', space: 'tradingpost', requireAccount: true, isNew: true },
     { id: 'payload', app: 'payload' },
     { id: 'pongjs', app: 'pongjs' },
     { id: 'devboard', app: 'devboard', space: 'devboard', isNew: true },

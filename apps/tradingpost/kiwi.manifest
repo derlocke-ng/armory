@@ -1,0 +1,13 @@
+# kiwi.manifest: this app's entry for the Kiwi Network web catalog
+NAME=tradingpost
+DESCRIPTION=Trading Post: a hemp marketplace for seeds, cuttings and gear, sealed listings found without plain words on the relays, for people with an account
+VERSION=0.1.0
+CATEGORY=App
+COMPONENTS=web
+FRAMEWORK=kiwi-framework
+ICON=icon.svg
+# the nostr event kinds it reads and writes
+KINDS=30830 1984 7805
+TAGS=nostr market hemp encrypted account
+HOMEPAGE=https://derlocke-ng.github.io/armory/tradingpost/
+LICENSE=GPL-3.0-or-later

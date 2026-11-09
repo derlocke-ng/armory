@@ -8,18 +8,18 @@ Armory is a distribution of [kiwi-framework](https://github.com/derlocke-ng/kiwi
 npm ci && npm run build        # assembles _site/ (the hub at the root, apps below, hub.json)
 npm test                       # unit tests: the site assembles, registry consistent, strings complete
 node test/e2e/hub.mjs          # Armory's own suite: one account for the whole suite
-node test/e2e/loadout.mjs && node test/e2e/devboard.mjs && node test/e2e/outpost.mjs && node test/e2e/payload.mjs && node test/e2e/pong.mjs && node test/e2e/uplink.mjs
+node test/e2e/loadout.mjs && node test/e2e/devboard.mjs && node test/e2e/outpost.mjs && node test/e2e/tradingpost.mjs && node test/e2e/payload.mjs && node test/e2e/pong.mjs && node test/e2e/uplink.mjs
 ```
 
-The six app suites are the framework's, run against Armory's build under Armory's mount names. Run suites one after another. `npm run dev` serves the hub with hot reload.
+The seven app suites are the framework's, run against Armory's build under Armory's mount names. Run suites one after another. `npm run dev` serves the hub with hot reload.
 
 ## Updating the framework
 
-Pin by commit, never by branch: `npm install git+https://github.com/derlocke-ng/kiwi-framework.git#<sha>`, then put the `git+https://…git#<sha>` form back into `package.json` and `package-lock.json` (npm rewrites it to `github:…`), `npm ci`, `npm run build`, `npm test`, the seven suites, commit (`Pin kiwi-framework <version>; …`), push `main`. `.github/workflows/deploy.yml` builds and deploys GitHub Pages; `https://derlocke-ng.github.io/armory/hub.json` shows the deployed `framework` version. The container image (`ghcr.io/derlocke-ng/armory`, `.github/workflows/image.yml`) builds on the same push.
+Pin by commit, never by branch: `npm install git+https://github.com/derlocke-ng/kiwi-framework.git#<sha>`, then put the `git+https://…git#<sha>` form back into `package.json` and `package-lock.json` (npm rewrites it to `github:…`), `npm ci`, `npm run build`, `npm test`, the eight suites, commit (`Pin kiwi-framework <version>; …`), push `main`. `.github/workflows/deploy.yml` builds and deploys GitHub Pages; `https://derlocke-ng.github.io/armory/hub.json` shows the deployed `framework` version. The container image (`ghcr.io/derlocke-ng/armory`, `.github/workflows/image.yml`) builds on the same push.
 
 ## What Armory is
 
-A public hub: public relays a person may replace, `purplepag.es` as the directory for relay lists, no public area (its own network is public already). Mounts: Loadout (`boards`), Outpost (`feed`, on the space `outpost`), Payload, pongjs, DevBoard (`notices`, on the space `devboard`), Uplink (`chat`). Coming: Trading Post (`market`) on a space of its own, mounted with `requireAccount: true` and a `hub.tradingpost.account` text in every language saying why (the owner decided: no age check, accounts instead). The card text of a mount is `hub.<mount id>.text` in `locales/*.json`; a new mount needs it in every language.
+A public hub: public relays a person may replace, `purplepag.es` as the directory for relay lists, no public area (its own network is public already). Mounts: Loadout (`boards`), Outpost (`feed`, on the space `outpost`), Trading Post (`market`, on the space `tradingpost`, `requireAccount: true`, the reason in `hub.tradingpost.account`: a hemp-related marketplace; the owner decided no age check), Payload, pongjs, DevBoard (`notices`, on the space `devboard`), Uplink (`chat`). A new or retired app also changes kiwi-web-catalog's `apps.list`. The card text of a mount is `hub.<mount id>.text` in `locales/*.json`; a new mount needs it in every language.
 
 ## Spaces
 

@@ -5,6 +5,8 @@
   "hub.relaysText": "Loadout e DevBoard si sincronizzano tramite questi relay nostr; scegli i tuoi nelle impostazioni. Payload e pongjs segnalano ancora tramite relay gun pubblici finché non passano anche loro a nostr. I relay passano i dati; non possono leggere nulla di ciò che è stato cifrato prima.",
   "hub.loadout.text": "Liste della spesa, cose da fare, inventario di casa e note in Markdown sincronizzati tra tutti i tuoi dispositivi e con chi vuoi: link in stile rentry, cifrati end-to-end. Funziona offline, e i tuoi dispositivi ripristinano ciò che i relay dimenticano.",
   "hub.outpost.text": "Diari di coltivazione: foto e note della tua coltivazione, per tutti in Outpost, i tuoi amici, una cerchia o solo te. Sigillati sul tuo dispositivo prima che qualcosa ne esca; commenti e mi piace da chi può leggerli.",
+  "hub.tradingpost.text": "Un mercato della canapa: semi, talee e attrezzatura, trovati per quello che sono e per dove spediscono. Gli annunci sono sigillati sul tuo dispositivo; ai venditori scrivi in Uplink. Per chi ha un account.",
+  "hub.tradingpost.account": "Trading Post è un mercato legato alla canapa, per questo Armory lo riserva a chi ha un account qui.",
   "hub.payload.text": "Invia file direttamente a un altro browser mentre siete entrambi online. WebRTC diretto quando possibile, altrimenti cifrato tramite un relay; ogni blocco da 64 KB è verificato con SHA-256.",
   "hub.pongjs.text": "Pong retrò per due giocatori tra due browser. Condividi un link o un codice QR, oppure scegli una partita aperta, e gioca in connessione diretta.",
   "hub.uplink.text": "Messaggi ai tuoi amici, sigillati sul tuo dispositivo, e stanze dal vivo in cui entra chiunque abbia il link, che spariscono quando si svuotano.",
