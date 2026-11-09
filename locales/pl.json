@@ -4,6 +4,7 @@
   "hub.footer": "Wolne oprogramowanie na licencji GPL – zobacz <a href=\"https://github.com/derlocke-ng/armory\" rel=\"noopener\">repozytorium</a>.",
   "hub.relaysText": "Loadout i DevBoard synchronizują się przez te przekaźniki nostr; własne wybierzesz w ustawieniach. Payload i pongjs wciąż sygnalizują przez publiczne przekaźniki gun, dopóki też nie przejdą na nostr. Przekaźniki przekazują dane; nie odczytają niczego, co wcześniej zaszyfrowano.",
   "hub.loadout.text": "Listy zakupów, zadania, domowy inwentarz i notatki w Markdown synchronizowane między wszystkimi Twoimi urządzeniami i osobami, którym je udostępnisz – linki jak w rentry, szyfrowane end-to-end. Działa offline, a Twoje urządzenia przywracają to, co przekaźniki zapomną.",
+  "hub.outpost.text": "Dzienniki uprawy: zdjęcia i notatki z twojej uprawy, dla wszystkich w Outpost, znajomych, kręgu albo tylko ciebie. Zapieczętowane na twoim urządzeniu, zanim cokolwiek je opuści; komentarze i polubienia od tych, którzy mogą je czytać.",
   "hub.payload.text": "Wysyłaj pliki prosto do innej przeglądarki, gdy oboje jesteście online. Bezpośrednio przez WebRTC, gdy się da, a w przeciwnym razie zaszyfrowane przez przekaźnik; każdy fragment 64 KB jest sprawdzany przez SHA-256.",
   "hub.pongjs.text": "Retro Pong dla dwóch graczy między dwiema przeglądarkami. Udostępnij link lub kod QR albo wybierz otwartą grę i graj przez bezpośrednie połączenie.",
   "hub.uplink.text": "Wiadomości do znajomych, zapieczętowane na Twoim urządzeniu, i pokoje na żywo dla każdego z linkiem, znikające, gdy opustoszeją.",

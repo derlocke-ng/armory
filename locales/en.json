@@ -4,6 +4,7 @@
   "hub.footer": "Free software under the GPL — see the <a href=\"https://github.com/derlocke-ng/armory\" rel=\"noopener\">repository</a>.",
   "hub.relaysText": "Loadout and DevBoard sync over these nostr relays; pick your own in the settings. Payload and pongjs still signal through public gun relays until they move to nostr too. Relays pass data along; they can’t read anything that was encrypted first.",
   "hub.loadout.text": "Grocery lists, to-dos, household inventory and markdown notes that sync between all your devices and whoever you share them with — rentry-style links, end-to-end encrypted. Works offline, and your devices put back whatever the relays forget.",
+  "hub.outpost.text": "Grow reports: photos and notes from your grow, for everyone in Outpost, your friends, a circle or only you. Sealed on your device before anything leaves it; comments and likes from the people who can read them.",
   "hub.payload.text": "Send files straight to another browser while you’re both online. Direct WebRTC when possible, encrypted through a relay otherwise, every 64 KB piece checked with SHA-256.",
   "hub.pongjs.text": "Retro two-player Pong between two browsers. Share a link or QR code or pick an open game, then play over a direct connection.",
   "hub.uplink.text": "Messages to your friends, sealed on your device, and live rooms anyone with the link can join that vanish when they empty.",

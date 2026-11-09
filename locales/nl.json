@@ -4,6 +4,7 @@
   "hub.footer": "Vrije software onder de GPL – zie de <a href=\"https://github.com/derlocke-ng/armory\" rel=\"noopener\">repository</a>.",
   "hub.relaysText": "Loadout en DevBoard synchroniseren via deze nostr-relays; kies je eigen in de instellingen. Payload en pongjs signaleren nog via openbare gun-relays tot ook zij naar nostr gaan. Relays geven data door; wat vooraf versleuteld is kunnen ze niet lezen.",
   "hub.loadout.text": "Boodschappenlijsten, to-do’s, huishoudvoorraad en Markdown-notities die synchroon blijven tussen al je apparaten en iedereen met wie je ze deelt – links zoals bij rentry, end-to-end versleuteld. Werkt offline, en je apparaten zetten terug wat de relays vergeten.",
+  "hub.outpost.text": "Kweekverslagen: foto’s en notities van je kweek, voor iedereen in Outpost, je vrienden, een kring of alleen jou. Verzegeld op je apparaat voordat er iets vandaan gaat; reacties en likes van wie ze kan lezen.",
   "hub.payload.text": "Stuur bestanden rechtstreeks naar een andere browser terwijl jullie allebei online zijn. Direct via WebRTC waar mogelijk, anders versleuteld via een relay; elk stuk van 64 KB wordt gecontroleerd met SHA-256.",
   "hub.pongjs.text": "Retro-Pong voor twee spelers tussen twee browsers. Deel een link of QR-code of kies een open spel, en speel via een directe verbinding.",
   "hub.uplink.text": "Berichten aan je vrienden, verzegeld op je apparaat, en live-kamers waar iedereen met de link in kan en die verdwijnen zodra ze leeg zijn.",

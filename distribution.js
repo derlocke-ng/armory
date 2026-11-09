@@ -23,7 +23,9 @@
 //            is this hub's route (<id>/) and the i18n key of its card text
 //            (hub.<id>.text in locales/). `space` names one of the spaces
 //            above; an app that serves no community (Loadout, Payload, pong,
-//            the chat) is mounted without one.
+//            the chat) is mounted without one. `requireAccount: true` makes a
+//            mount ask for an account (username and password), not only a key,
+//            and say why (hub.<id>.account in locales/); no age is asked.
 //   media    the default media (Blossom) servers for photos, first choice
 //            first, until a user picks their own in the settings (Network,
 //            Media servers, where each one can be checked)
@@ -58,6 +60,12 @@ export const DISTRIBUTION = {
   policy: { userMounts: false, relays: 'open', requireHub: false },
   spaces: [
     {
+      id: 'outpost',
+      name: 'Outpost',
+      description: 'Grow reports: photos and notes from people’s grows, week by week.',
+      relays: [],
+    },
+    {
       id: 'devboard',
       name: 'DevBoard',
       description: 'Freelance work: who is hiring, who is available. Signed notes with proof of work; three live notes per person; notes expire.',
@@ -66,6 +74,7 @@ export const DISTRIBUTION = {
   ],
   apps: [
     { id: 'loadout', name: 'Loadout', icon: 'list-checks', tags: ['nostr', 'E2EE', 'offline-first', 'markdown'], framework: 'boards' },
+    { id: 'outpost', name: 'Outpost', icon: 'sprout', tags: ['nostr', 'E2EE', 'photos', 'NIP-72'], framework: 'feed' },
     { id: 'payload', name: 'Payload', icon: 'send', tags: ['gun', 'WebRTC', 'SHA-256'], framework: 'payload' },
     { id: 'pongjs', name: 'pongjs', icon: 'gamepad-2', tags: ['gun', 'WebRTC', 'canvas'], framework: 'pong' },
     { id: 'devboard', name: 'DevBoard', icon: 'sticky-note', tags: ['nostr', 'proof of work', 'signed notes'], framework: 'notices' },
@@ -73,6 +82,7 @@ export const DISTRIBUTION = {
   ],
   mounts: [
     { id: 'loadout', app: 'loadout', featured: true, isNew: true },
+    { id: 'outpost', app: 'outpost', space: 'outpost', isNew: true },
     { id: 'payload', app: 'payload' },
     { id: 'pongjs', app: 'pongjs' },
     { id: 'devboard', app: 'devboard', space: 'devboard', isNew: true },
