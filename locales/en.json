@@ -4,7 +4,7 @@
   "hub.footer": "Free software under the GPL — see the <a href=\"https://github.com/derlocke-ng/armory\" rel=\"noopener\">repository</a>.",
   "hub.relaysText": "Every tool here syncs over these nostr relays; pick your own in the settings. Relays pass data along; they can’t read anything that was encrypted first. Photos and files go, encrypted, to your media servers.",
   "hub.loadout.text": "Grocery lists, to-dos, household inventory and markdown notes that sync between all your devices and whoever you share them with — rentry-style links, end-to-end encrypted. Works offline, and your devices put back whatever the relays forget.",
-  "hub.outpost.text": "Grow reports: photos and notes from your grow, for everyone in Outpost, your friends, a circle or only you. Sealed on your device before anything leaves it; comments and likes from the people who can read them.",
+  "hub.outpost.text": "Grow reports and grow diaries: photos and notes from your grow, week by week, for everyone in Outpost, your friends, a circle or only you. Sealed on your device before anything leaves it; comments and likes from the people who can read them.",
   "hub.tradingpost.text": "A hemp marketplace: seeds, cuttings and gear, found by what they are and where they ship. Listings are sealed on your device; you write to sellers in Uplink. For people with an account.",
   "hub.tradingpost.account": "Trading Post is a hemp-related marketplace, so Armory keeps it for people with an account here.",
   "hub.payload.text": "Files to anyone: a link that waits on your media servers, encrypted, until you delete it; files to friends and groups in Uplink; or straight from your browser to theirs, stored nowhere. What came in Uplink is listed too.",

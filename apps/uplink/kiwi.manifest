@@ -1,7 +1,7 @@
 # kiwi.manifest: this app's entry for the Kiwi Network web catalog
 NAME=uplink
 DESCRIPTION=Uplink: messages and files to your friends (NIP-17, sealed on your device, files encrypted on Blossom media servers), groups that stay until their host closes them, and live rooms anyone with the link can join, gone when they empty; replies, reactions, edits, pins, search, disappearing messages, voice and video calls
-VERSION=0.3.0
+VERSION=0.3.1
 CATEGORY=App
 COMPONENTS=web
 FRAMEWORK=kiwi-framework
